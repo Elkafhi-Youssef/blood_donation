@@ -26,8 +26,8 @@
 		function __construct(){
 			try{
 				$this->pdo = new PDO("mysql:host=$this->host_name;dbname=$this->db_name",$this->user_name,$this->passwd);
-			}catch(PDOExeption $exp){
-				die($exp->getMessage());
+			}catch(PDOException $e){
+				die($e->getMessage());
 			}
 		}
 

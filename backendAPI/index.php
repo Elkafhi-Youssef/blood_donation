@@ -7,13 +7,15 @@
   header('Access-Control-Allow-Methods: POST');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
   // Define the directory deparator
+  
 const DS = DIRECTORY_SEPARATOR;
   require_once './config/config.php';
+  require __DIR__ . '/vendor/autoload.php';
 
   // Autoload core classes
   spl_autoload_register(function($className ){
     try {
-      require_once FRAMEWK_PATH.DS.$className.'.php';
+      require FRAMEWK_PATH.DS.$className.'.php';
     } catch (Exception $e) {
       die($e->getMessage());
     }

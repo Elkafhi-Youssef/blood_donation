@@ -24,13 +24,13 @@
 
    // Database params
   //  define('DB_NAME','gestionrdvs');
-   define('DB_NAME','api');
+   define('DB_NAME','blood');
    define('DB_USER','root');
    define('DB_HOST','127.0.0.1');
    define('DB_PASSWD','');
 
    // URL ROOT
-   define('URLROOT', 'http://127.0.0.1/gestionRDVS/backendAPI');
+   define('URLROOT', 'http://127.0.0.1/BLOOD_DONATION/backendAPI');
 
    // Access Control Allow Origin
   //  define('ORIGIN', 'http://localhost/gbests');

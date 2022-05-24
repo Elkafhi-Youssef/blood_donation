@@ -1,7 +1,7 @@
 <?php
 
 
-class Admins extends Controller
+class Home extends Controller
 {
 
     public function __construct()
@@ -10,7 +10,9 @@ class Admins extends Controller
         $this->setModelInstance('Admin');
         
     }
-   
+   public function index(){
+       $this->response();
+   }
     public function login()
     {
         if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
