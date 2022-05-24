@@ -1,15 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import Dashboardusers from '../views/Dashboardusers.vue'
-import Dashboard from '../views/Dashboard.vue'
-import Dashboardhospitals from '../views/Dashboardhospitals.vue'
+import Loginadmin from '../views/admin/Loginadmin.vue'
+import Dashboardusers from '../views/admin/Dashboardusers.vue'
+import Dashboard from '../views/admin/Dashboard.vue'
+import Dashboardhospitals from '../views/admin/Dashboardhospitals.vue'
+import Home from '../views/user/Home.vue'
 const routes = [
   
 
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'loginadmin',
+    component: Loginadmin
   },
   {
     path: '/dashboard',
@@ -25,7 +26,12 @@ const routes = [
         component: Dashboardhospitals,
       },
     ],
-  }
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: Home
+  },
 ]
 
 const router = createRouter({
