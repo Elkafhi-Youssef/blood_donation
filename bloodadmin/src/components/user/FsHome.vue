@@ -24,8 +24,8 @@
       </div>
     </div>
     <div class=" w-screen  ">
-      <div class=" mx-2 sm:mx-8 md:mx-16 flex justify-center gap-2 flex-wrap ">
-          <div class=" relative bg-primary_col flex flex-col text-center w-52  h-28 rounded-xl">
+      <div class=" mx-2 sm:mx-8 md:mx-16 lg:mx-28  flex justify-center gap-2 flex-wrap ">
+          <div class=" relative bg-primary_col flex flex-col text-center w-64  h-28 rounded-xl">
               <div class="">
                   <img class=" mx-auto w-auto h-12" src="@/assets/img/A+.png" alt="">
               </div>
@@ -36,9 +36,9 @@
                   <img class=" h-12 w-auto" src="@/assets/img/btbr.png" alt="">
               </div>
           </div>
-          <div class=" relative bg-primary_col flex flex-col text-center w-52  h-28 rounded-xl">
+          <div class=" relative bg-primary_col flex flex-col text-center w-64  h-28 rounded-xl">
               <div class="">
-                  <img class=" mx-auto w-auto h-12" src="@/assets/img/A+.png" alt="">
+                  <img class=" mx-auto w-auto h-12" src="@/assets/img/A-.png" alt="">
               </div>
               <div class=" text-white mt-2">
                   <h2>(22)</h2>
@@ -47,9 +47,9 @@
                   <img class=" h-12 w-auto" src="@/assets/img/btbr.png" alt="">
               </div>
           </div>
-          <div class=" relative bg-primary_col flex flex-col text-center w-52  h-28 rounded-xl">
+          <div class=" relative bg-primary_col flex flex-col text-center w-64  h-28 rounded-xl">
               <div class="">
-                  <img class=" mx-auto w-auto h-12" src="@/assets/img/A+.png" alt="">
+                  <img class=" mx-auto w-auto h-12" src="@/assets/img/B+.png" alt="">
               </div>
               <div class=" text-white mt-2">
                   <h2>(22)</h2>
@@ -58,9 +58,9 @@
                   <img class=" h-12 w-auto" src="@/assets/img/btbr.png" alt="">
               </div>
           </div>
-          <div class=" relative bg-primary_col flex flex-col text-center w-52  h-28 rounded-xl">
+          <div class=" relative bg-primary_col flex flex-col text-center w-64  h-28 rounded-xl">
               <div class="">
-                  <img class=" mx-auto w-auto h-12" src="@/assets/img/A+.png" alt="">
+                  <img class=" mx-auto w-auto h-12" src="@/assets/img/B-.png" alt="">
               </div>
               <div class=" text-white mt-2">
                   <h2>(22)</h2>
@@ -69,9 +69,9 @@
                   <img class=" h-12 w-auto" src="@/assets/img/btbr.png" alt="">
               </div>
           </div>
-          <div class=" relative bg-primary_col flex flex-col text-center w-52  h-28 rounded-xl">
+          <div class=" relative bg-primary_col flex flex-col text-center w-64  h-28 rounded-xl">
               <div class="">
-                  <img class=" mx-auto w-auto h-12" src="@/assets/img/A+.png" alt="">
+                  <img class=" mx-auto w-auto h-12" src="@/assets/img/AB+.png" alt="">
               </div>
               <div class=" text-white mt-2">
                   <h2>(22)</h2>
@@ -80,9 +80,9 @@
                   <img class=" h-12 w-auto" src="@/assets/img/btbr.png" alt="">
               </div>
           </div>
-          <div class=" relative bg-primary_col flex flex-col text-center w-52  h-28 rounded-xl">
+          <div class=" relative bg-primary_col flex flex-col text-center w-64  h-28 rounded-xl">
               <div class="">
-                  <img class=" mx-auto w-auto h-12" src="@/assets/img/A+.png" alt="">
+                  <img class=" mx-auto w-auto h-12" src="@/assets/img/AB-.png" alt="">
               </div>
               <div class=" text-white mt-2">
                   <h2>(22)</h2>
@@ -91,9 +91,9 @@
                   <img class=" h-12 w-auto" src="@/assets/img/btbr.png" alt="">
               </div>
           </div>
-          <div class=" relative bg-primary_col flex flex-col text-center w-52  h-28 rounded-xl">
+          <div class=" relative bg-primary_col flex flex-col text-center w-64  h-28 rounded-xl">
               <div class="">
-                  <img class=" mx-auto w-auto h-12" src="@/assets/img/A+.png" alt="">
+                  <img class=" mx-auto w-auto h-12" src="@/assets/img/O+.png" alt="">
               </div>
               <div class=" text-white mt-2">
                   <h2>(22)</h2>
@@ -102,9 +102,9 @@
                   <img class=" h-12 w-auto" src="@/assets/img/btbr.png" alt="">
               </div>
           </div>
-          <div class=" relative bg-primary_col flex flex-col text-center w-52  h-28 rounded-xl">
+          <div class=" relative bg-primary_col flex flex-col text-center w-64  h-28 rounded-xl">
               <div class="">
-                  <img class=" mx-auto w-auto h-12" src="@/assets/img/A+.png" alt="">
+                  <img class=" mx-auto w-auto h-12" src="@/assets/img/O-.png" alt="">
               </div>
               <div class=" text-white mt-2">
                   <h2>(22)</h2>

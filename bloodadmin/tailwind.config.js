@@ -13,6 +13,9 @@ module.exports = {
       'third_col': '#FFD6E8',
 
     }, 
+    width: {
+      '128': '32rem',
+    }
   },
   },
   plugins: [],

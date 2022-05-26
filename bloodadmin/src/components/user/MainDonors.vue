@@ -1,17 +1,17 @@
 <template>
   <div
-    class="flex flex-col justify-center text-white font-extrabold items-center h-screen"
+    class="flex flex-col justify-center text-white font-extrabold items-center md:h-[40vh]"
     :style="{
       'background-image': `url(${mainImage})`,
       'background-size': 'cover',
       'background-position': 'center',
     }"
   >
-    <div class="text-2xl text-center  sm:text-4xl md:text-5xl b w-[90%] ">
-      <h3>Saving lives doesn't have to A lot of things hurt.</h3>
+    <div class=" mt-6 text-2xl text-center  sm:text-3xl md:text-4xl  lg:text-5xl  b w-[90%] ">
+      <h3>List Of Donors</h3>
     </div>
     <div
-      class="mt-20 w-[90%] mx-auto px-2 py-2 bg-white border-2 border-red-400 rounded-lg"
+      class=" mt-6 mb-6 w-[80%] mx-auto px-2 py-2 bg-white border-2 border-red-400 rounded-lg"
     >
       <form action="">
         <div class="flex md:justify-between flex-col sm:flex-col md:flex-row">
@@ -76,10 +76,10 @@
 
 <script>
 export default {
-  name: "MainHome",
+  name: "MainDonors",
   data() {
     return {
-      mainImage: require("@/assets/img/mainimg.png"),
+      mainImage: require("@/assets/img/hdimg.jpg"),
     };
   },
 };
