@@ -67,7 +67,7 @@ class User extends Controller
             if($check){
                 if(password_verify($password, $check['password']))
                 {
-                    $token = Auth::jwt_encode(66 * 66, $check['user_id']);
+                    $token = Auth::jwt_encode(66 * 66, $check);
                     $this->res['token'] = $token;
                     $this->res['message'] = 'success';
                     $this->res['alert'] = 'You have successfully logged in';
@@ -87,6 +87,23 @@ class User extends Controller
                 $this->response();
             }
         }
+    }
+    public function top_secret()
+    {
+
+        if ($token = Auth::isValideToken()) {
+            $this->res['data'] = "This is secret";
+            $this->res['code'] = 200;
+            $this->res['token'] = $token;
+        } else {
+            $this->res['data'] = "No data";
+            $this->res['message'] = "failed";
+            $this->res['alert'] = "Unauthorized user";
+            $this->res['code'] = 404;
+            $this->res['token'] = $token;
+        }
+
+        $this->response();
     }
 }
 
