@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen mb-8 ">
+  <div class=" mb-8 ">
     <div
       class="h-24 sm:h-40 flex justify-center items-end "
       :style="{
@@ -23,8 +23,8 @@
         <h3>Avaiable Blood Donors</h3>
       </div>
     </div>
-    <div class=" w-screen  ">
-      <div class=" mx-2 sm:mx-8 md:mx-16 lg:mx-28  flex justify-center gap-2 flex-wrap ">
+    <div class=" w-full ">
+      <div class=" mx-2 sm:mx-8 md:mx-16   flex justify-center gap-2 flex-wrap ">
           <div class=" relative bg-primary_col flex flex-col text-center w-64  h-28 rounded-xl">
               <div class="">
                   <img class=" mx-auto w-auto h-12" src="@/assets/img/A+.png" alt="">

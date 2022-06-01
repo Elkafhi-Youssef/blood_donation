@@ -22,6 +22,15 @@ export default {
         FsHome,
         SsHome,
         Footer
+    },
+
+    methods :{
+         logout() {
+      console.log("logout");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user"); 
+      this.$router.push("/");
+    },
     }
 }
 

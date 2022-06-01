@@ -1,10 +1,11 @@
 <template>
   <div
-    class="flex flex-col justify-center text-white font-extrabold items-center h-screen"
+    class="flex flex-col justify-center text-white font-extrabold items-center h-screen -z-40"
     :style="{
       'background-image': `url(${mainImage})`,
       'background-size': 'cover',
       'background-position': 'center',
+      'z-index': '-1',
     }"
   >
     <div class="text-2xl text-center  sm:text-4xl md:text-5xl b w-[90%] ">
