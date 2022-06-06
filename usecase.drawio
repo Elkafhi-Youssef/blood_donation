@@ -140,7 +140,7 @@
                     <mxGeometry x="760" y="325" width="30" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="34" value="show Patients" style="ellipse;whiteSpace=wrap;html=1;rounded=0;sketch=0;strokeColor=#457B9D;fillColor=#A8DADC;fontColor=#1D3557;" vertex="1" parent="1">
-                    <mxGeometry x="501" y="410" width="99" height="50" as="geometry"/>
+                    <mxGeometry x="584" y="413" width="99" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="35" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;entryX=0.727;entryY=0.908;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;strokeColor=#457B9D;fontColor=#1D3557;entryPerimeter=0;labelBackgroundColor=#F1FAEE;" edge="1" parent="1" source="34" target="13">
                     <mxGeometry width="160" relative="1" as="geometry">
@@ -160,9 +160,6 @@
                         <Array as="points"/>
                         <mxPoint as="offset"/>
                     </mxGeometry>
-                </mxCell>
-                <mxCell id="38" value="Admin" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;rounded=0;sketch=0;strokeColor=#457B9D;fillColor=#A8DADC;fontColor=#1D3557;" vertex="1" parent="1">
-                    <mxGeometry x="760" y="130" width="30" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
