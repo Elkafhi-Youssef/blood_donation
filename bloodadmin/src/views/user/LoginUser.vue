@@ -6,19 +6,11 @@
         <div class="md:w-1/2 hidden md:flex">
           <img src="@/assets/img/imglogin.png" alt="" />
         </div>
-        <div class="w-full md:w-1/2 p-7 min-w-[375px]">
-          <form @submit.prevent="check">
-            <div class="form-group mb-6">
-              <label
-                for="email"
-                class="form-label inline-block mb-2 text-gray-700"
-                >Email address</label
-              >
-              <input
-                type="email"
-                name="email"
-                v-model="user.email"
-                class="
+        <div class="w-full md:w-1/2 p-7 min-w-[375px] ">
+          <form @submit.prevent="login">
+            <div class="form-group mb-6 ">
+              <label for="email" class="form-label inline-block mb-2 text-gray-700">Email address</label>
+              <input type="email" name="email" v-model="user.email" class="
                   form-control
                   block
                   w-full
@@ -38,23 +30,11 @@
                   focus:bg-white
                   focus:border-second_col
                   focus:outline-none
-                "
-                id=""
-                aria-describedby="email"
-                placeholder="Enter email"
-              />
+                " id="" aria-describedby="email" placeholder="Enter email" />
             </div>
             <div class="form-group mb-6">
-              <label
-                for="password"
-                class="form-label inline-block mb-2 text-gray-700"
-                >Password</label
-              >
-              <input
-                type="password"
-                name="password"
-                v-model="user.password"
-                class="
+              <label for="password" class="form-label inline-block mb-2 text-gray-700">Password</label>
+              <input type="password" name="password" v-model="user.password" class="
                   form-control
                   block
                   w-full
@@ -74,10 +54,7 @@
                   focus:bg-white
                   focus:border-second_col
                   focus:outline-none
-                "
-                id="password"
-                placeholder=" enter your Password"
-              />
+                " id="password" placeholder=" enter your Password" />
             </div>
             <div class="flex justify-between items-center mb-6">
               <!-- <div class="form-group form-check">
@@ -98,9 +75,7 @@
                 >Forgot password?</a
               > -->
             </div>
-            <button
-              type="submit"
-              class="
+            <button type="submit" class="
                 w-full
                 px-6
                 py-2.5
@@ -122,24 +97,19 @@
                 transition
                 duration-150
                 ease-in-out
-              "
-            >
+              ">
               Sign in
             </button>
             <p class="text-gray-800 mt-6 text-center">
               Not a member?
-              <router-link
-                to="/registeruser"
-                class="
+              <router-link to="/registeruser" class="
                   text-blue-600
                   hover:text-blue-700
                   focus:text-blue-700
                   transition
                   duration-200
                   ease-in-out
-                "
-                >Register</router-link
-              >
+                ">Register</router-link>
             </p>
           </form>
         </div>
@@ -176,7 +146,7 @@ export default {
   },
   methods: {
     check() {
-      const { email,  password } =
+      const { email, password } =
         this.user;
       if (email == "" || password == "") {
         createToast(
@@ -197,27 +167,30 @@ export default {
         this.login();
       }
     },
-    login () {
+    login() {
       const { email, password } = this.user;
-      // this.$store
-      //   .dispatch("loginuser", { email, password })
-       const data = JSON.stringify({email,password});
+
+      const data = JSON.stringify({ email, password });
       const config = {
         method: 'post',
         url: 'http://127.0.0.1/blood_donation/backendAPI/User/login',
         headers: {
           'Content-Type': 'application/json'
         },
-        data : data
+        data: data
       };
       axios(config)
         .then((response) => {
           // console.log(response.data);
-          let token = response.data.token;
-          localStorage.setItem("token", token);
-          localStorage.setItem("user", JSON.stringify(response.data.user));
-          console.log(response.data.user);
+          // let token = response.data.token;
+
+
+
+          console.log(response.data.data);
           if (response.data.message == "success") {
+            localStorage.setItem("user", JSON.stringify(response.data.data));
+            let token = response.data.token;
+            localStorage.setItem("token", token);
             this.$router.push("/");
             createToast(
               {
@@ -256,4 +229,5 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

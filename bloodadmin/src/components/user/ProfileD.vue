@@ -71,16 +71,16 @@
         </div>
       </div>
 
-     <div class=" my-8  mx-auto min-w-[370px] max-w-[375px] max-h-[455px] md:max-w-[500px] flex flex-col items-center  bg-white rounded-lg shadow-lg w-[90%]">
+     <div class=" my-8  mx-auto min-w-[370px] max-w-[375px]  md:max-w-[500px] flex flex-col items-center  bg-white rounded-lg shadow-lg w-[90%]">
         <div class="w-full p-7 min-w-[375px] ">
-          <div class="flex justify-center mb-10">
+          <div class="flex justify-center mb-8">
             <h1 class="text-lg sm:text-2xl md:text-4xl">Add Request</h1>
           </div>
           <form>
-            <div class="form-group mb-6">
+            <div class="form-group mb-3">
               <label
                 for="exampleInputEmail2"
-                class="form-label inline-block mb-2 text-gray-700"
+                class="form-label inline-block mb-10 text-gray-700"
                 >Hospital Name-City</label
               >
               <select
@@ -101,14 +101,19 @@
                 >Email address</label
               >
               <input
-                type="email"
+                type="date"
                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-third_col rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-second_col focus:outline-none"
                 id="exampleInputEmail2"
                 aria-describedby="emailHelp"
-                placeholder="Enter email"
+                placeholder="Enter when you need blood"
               />
             </div>
             <div class="form-group mb-6">
+               <label
+                for="exampleInputEmail2"
+                class="form-label inline-block mb-2 text-gray-700"
+                >Add Desription</label
+              >
               <textarea
                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-third_col rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-second_col focus:outline-none"
                 id="exampleFormControlTextarea13"

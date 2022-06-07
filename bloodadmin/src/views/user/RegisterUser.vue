@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <div class="bg-gray-100 w-screen flex justify-center items-center py-16">
+    <div class="bg-gray-100  flex justify-center items-center py-16">
       <div class="bg-white rounded-lg sm:shadow-lg md:max-w-3xl sm:w-[32rem] md:w-[768px]"
       >
         <div class="bg-white flex flex-col py-2 m-0 sm:m-3">
@@ -11,7 +11,7 @@
           <div class="flex justify-center mb-10">
             <h1 class="text-lg sm:text-2xl md:text-4xl">Register</h1>
           </div>
-          <form @submit.prevent="check">
+          <form @submit.prevent="check" enctype="multipart/form-data">
             <div class="flex flex-wrap justify-center gap-4 sm:mx-0">
               <div class="form-group mb-0 min-w-[360px]">
                 <label
@@ -150,6 +150,28 @@
                   placeholder="Enter password"
                 />
               </div>
+              <div class="mb-3 w-96">
+              <label for="imge" class="form-label inline-block mb-2 text-gray-700">Image</label>
+              <input 
+
+              class="form-control
+              block
+              w-full
+              px-2
+              py-1
+              text-sm
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="image" type="file"
+              name="image"
+              @change = "imageChage">
+            </div>
             </div>
 
             <!-- <div class="flex justify-between items-center mb-6">
@@ -230,14 +252,23 @@ export default {
         role: "",
         blood_id: "",
         age: "",
+        image: "",
       },
+      file: null
     };
   },
   methods: {
+    imageChage(e) {
+      this.file = e.target.files[0];
+      this.user.image = this.file.name;
+      console.log(this.file);
+    },
     check() {
-      const { fullname, phone, email, city, password, role, blood_id, age } =
+      const { fullname, phone, email, city, password, role, blood_id, age ,image} =
         this.user;
-        if (fullname == "" || phone == "" || email == "" || city == "" || password == "" || role == "" || blood_id == "" || age == "") {
+        
+        
+        if (fullname == "" || phone == "" || email == "" || city == "" || password == "" || role == "" || blood_id == "" || age == "",image == "") {
           createToast({
             title: 'Error',
             description: 'Please fill all the fields'
@@ -256,38 +287,9 @@ export default {
         }
     },
     register() {
-      // access to register action in a store in a moduleB
-
-      // this.$store.dispatch("register", this.user).then((response) => {
-      //   if (response.data.message == "success") {
-      //     createToast({
-      //       title: 'Some text',
-      //       description: 'Registration Successful'
-      //       },
-      //       {
-      //       showIcon: 'true',
-      //       showCloseButton: 'true',
-      //       swipeClose: 'true',
-      //       toastBackgroundColor: 'green',
-      //       type: 'success',
-      //       })
-      //       this.$router.push("/loginuser");
-      //   } else {
-      //     createToast({
-      //       title: 'Some text',
-      //       description: 'Registration Failed'
-      //       },
-      //       {
-      //       showIcon: 'true',
-      //       showCloseButton: 'true',
-      //       swipeClose: 'true',
-      //       toastBackgroundColor: 'red',
-      //       type: 'warning',
-      //       })
-      //   }
-      // });
-      this.$store.dispatch("registeruser", this.user).then((response) => {
-        console.log(response);
+      this.$store.dispatch("registeruser", {user :this.user,file : this.file}).then(() => {
+       
+        return true;
         this.$router.push("/loginuser");
         createToast({
             title: 'Success',

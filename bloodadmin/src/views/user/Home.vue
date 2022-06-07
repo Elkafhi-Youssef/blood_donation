@@ -14,6 +14,7 @@ import MainHome from '../../components/user/MainHome.vue'
 import FsHome from '../../components/user/FsHome.vue'
 import SsHome from '../../components/user/SsHome.vue'
 import Footer from '../../components/user/Footer.vue'
+import { computed } from '@vue/runtime-core'
 export default {
     name: 'Layout',
     components: {
@@ -25,12 +26,17 @@ export default {
     },
 
     methods :{
-         logout() {
-      console.log("logout");
-      localStorage.removeItem("token");
-      localStorage.removeItem("user"); 
-      this.$router.push("/");
+    //      logout() {
+    //   console.log("logout");
+    //   localStorage.removeItem("token");
+    //   localStorage.removeItem("user"); 
+    //   this.$router.push("/");
+    // },
     },
+    computed: {
+        isLoggedIn() {
+            
+        }
     }
 }
 

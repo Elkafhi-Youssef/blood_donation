@@ -67,10 +67,9 @@
                 >
               </li>
               <li>
-                <a
-                  href="#"
+                <router-link to="/donors"
                   class="block py-2 pr-4 pl-3 text-white border-gray-100 md:border-0 md:p-0 hover:text-second_col"
-                  >Donors</a
+                  >Donors</router-link
                 >
               </li>
               <li>
@@ -81,27 +80,26 @@
                 >
               </li>
               <li>
-                <a
-                  href="#"
+                <router-link to="/contact"
                   class="block py-2 pr-4 pl-3 text-white border-gray-100 md:border-0 md:p-0 hover:text-second_col"
-                  >Contact</a
+                  >Contact</router-link
                 >
               </li>
-              <li v-if="token == ''">
+              <li v-if="!token">
                 <button
                   class="text-white bg-second_col border border-second_col md:hover:bg-transparent font-bold py-2 px-4 rounded"
                 >
-                  <a href="#"> Sing in </a>
+                  <router-link to="/loginuser"> Sing in </router-link>
                 </button>
               </li>
-              <li v-if="token == ''" class="mt-2 sm:mt-0 overflow-hidden">
+              <li v-if="!token" class="mt-2 sm:mt-0 overflow-hidden">
                 <button
                   class="text-white bg-second_col border border-second_col md:hover:bg-transparent font-bold py-2 px-4 rounded"
                 >
-                  <a href="#"> Sing in </a>
+                  <router-link to="/registeruser"> Sing up </router-link>
                 </button>
               </li>
-              <li v-if="token !== ''" class="mt-2 sm:mt-0 overflow-hidden">
+              <li v-if="token" class="mt-2 sm:mt-0 overflow-hidden">
                 <div >
                   <button
                     @click="dropdownOpen = !dropdownOpen"
@@ -178,7 +176,7 @@
                       >
                       <a
                         @click="logout"  
-                        class="flex px-4 py-2 rounded-md text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+                        class="flex px-4 py-2 rounded-md text-sm text-gray-700 hover:bg-indigo-600 hover:text-white cursor-pointer"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -209,12 +207,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: "Header",
   data() {
     return {
       menuIsopen: false,
       dropdownOpen: false,
+      token: localStorage.getItem("token") ,
       // headermenu :[
       //   { to: '/', title: 'sign in',
       //     showButton: !this.$store.state.auth.isUserLoggedIn },
@@ -225,16 +226,29 @@ export default {
     openmenu() {
       this.menuIsopen = !this.menuIsopen;
     },
+      logout() {
+      console.log("logout");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      this.$router.push("/loginuser");
+    },
+    // logout: function () {
+    // this.$store.dispatch(AUTH_LOGOUT)
+    // .then(() => {
+    //   this.$router.push('/loginuser')
+    // })
+  }
    
     
-  },
-  computed: {
-    token() {
-      console.log(this.$store.state.Users.token);
-
-      return this.$store.state.Users.token;
-    },
-  },
+ 
+  
+  // mounted: {
+  //   // token() {
+  //   //   console.log(localStorage.getItem("token"));
+  //   //   this.token = localStorage.getItem("token");
+  //   // },
+  
+  // },
 };
 </script>
 

@@ -15,24 +15,20 @@ class User extends Controller
     }
     public function register(){
         if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
-            $data = json_decode(file_get_contents("php://input"));
-            if(empty($data)){
-                $this->res['token'] = null;
-                $this->res['message'] = 'data not found';
-                $this->res['alert'] = 'You have to fill all the fields';
-                $this->res['err'] = true;
-                $this->response();
-            }
-            $fullname = htmlentities($data->fullname);
-            $phone = htmlentities($data->phone);
-            $email = htmlentities($data->email);
-            $city = htmlentities($data->city);
-            $password = htmlentities($data->password);
-            $role = htmlentities($data->role);
-            $blood_id = htmlentities($data->blood_id);
-            $age = htmlentities($data->age);
+            $fullname = htmlentities($_POST['fullname']);
+            $phone = htmlentities($_POST['phone']);
+            $email = htmlentities($_POST['email']);
+            $city = htmlentities($_POST['city']);
+            $password = htmlentities($_POST['password']);
+            $role = htmlentities($_POST['role']);
+            $blood_id = htmlentities($_POST['blood_id']);
+            $age = htmlentities($_POST['age']);
             $new_password = password_hash($password, PASSWORD_DEFAULT);
-            $check =$this->modelInstance->createUser($fullname,$phone,$email,$city,$new_password,$role,$blood_id,$age);
+            $image = $age.$role.$_FILES['image']['name'];
+            $image_tmp = $_FILES['image']['tmp_name'];
+            $image_destination = ROOT.DS.'public'.DS.'imgsProfile'.DS . $image;
+            move_uploaded_file($image_tmp, $image_destination);
+            $check =$this->modelInstance->createUser($fullname,$phone,$email,$city,$new_password,$role,$blood_id,$age,$image);
             if($check){
                 $this->res['token'] = null;
                 $this->res['message'] = 'success';
@@ -104,6 +100,78 @@ class User extends Controller
         }
 
         $this->response();
+    }
+    public function getusersshome()
+    {
+        $data  = $this->modelInstance->getusersshome();
+        if ($data) {
+            $this->res['data'] = $data;
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        } else {
+            $this->res['data'] = "No data";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+        $this->response();
+    }
+    public function getBloodTypes(){
+        $data  = $this->modelInstance->getBloodTypes();
+        if ($data) {
+            $this->res['data'] = $data;
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        } else {
+            $this->res['data'] = "No data";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+        $this->response();
+    }
+    public function getUserById($id){
+        $data  = $this->modelInstance->getUser($id);
+        if ($data) {
+            $this->res['data'] = $data;
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        } else {
+            $this->res['data'] = "No data";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+        $this->response();
+    }
+    public function getAllCities(){
+        $data  = $this->modelInstance->getAllCities();
+        if ($data) {
+            $this->res['data'] = $data;
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        } else {
+            $this->res['data'] = "No data";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+        $this->response();
+    }
+    public function getUsersByCityBlood(){
+        if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
+            $data = json_decode(file_get_contents("php://input"));
+           
+            $city = htmlentities($data->city);
+            $blood = htmlentities($data->blood);
+            $data  = $this->modelInstance->getUsersByCityBlood($city,$blood);
+            if ($data) {
+                $this->res['data'] = $data;
+                $this->res['code'] = 200;
+                $this->res['message'] = "success";
+            } else {
+                $this->res['data'] = "No data";
+                $this->res['message'] = "failed";
+                $this->res['code'] = 404;
+            }
+            $this->response();
+    }
     }
 }
 
