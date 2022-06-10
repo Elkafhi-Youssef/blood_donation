@@ -18,7 +18,7 @@
             return $this->db->getRow(); 
         }
     public function getusersshome(){
-        $this->db->prepareQuery("SELECT user_id , fullname ,city,times,image,blood_type FROM users join bloods on users.blood_id = bloods.blood_id order by times desc limit 8");
+        $this->db->prepareQuery("SELECT user_id , fullname ,city,times,image,blood_type FROM users join bloods on users.blood_id = bloods.blood_id where users.role='donor' order by times desc limit 8");
         $this->db->execute();
         return $this->db->getResult();
     }
@@ -28,7 +28,7 @@
         return $this->db->getResult();
     }
     public function getUser($id){
-        $this->db->prepareQuery("SELECT * FROM users where user_id = ?");
+        $this->db->prepareQuery("SELECT * FROM users JOIN bloods on users.blood_id =  bloods.blood_id where users.user_id = ?");
         $this->db->execute([$id]);
         return $this->db->getRow();
     }
@@ -40,23 +40,28 @@
 
     public function getUsersByCityBlood($city =null,$blood_id = null){
         if($city == null && $blood_id == null){
-            $this->db->prepareQuery("SELECT * FROM users");
+            $this->db->prepareQuery("SELECT * FROM users join bloods on users.blood_id = bloods.blood_id");
             $this->db->execute();
             return $this->db->getResult();
         }elseif($city == null && $blood_id != null){
-            $this->db->prepareQuery("SELECT * FROM users where blood_id = ?");
+            $this->db->prepareQuery("SELECT * FROM users join bloods on users.blood_id = bloods.blood_id where blood_id = ?");
             $this->db->execute([$blood_id]);
             return $this->db->getResult();
         }elseif($city != null && $blood_id == null){
-            $this->db->prepareQuery("SELECT * FROM users where city = ?");
+            $this->db->prepareQuery("SELECT *FROM users join bloods on users.blood_id = bloods.blood_id where city = ?");
             $this->db->execute([$city]);
             return $this->db->getResult();
         }else{
-            $this->db->prepareQuery("SELECT * FROM users where city = ? and blood_id = ?");
+            $this->db->prepareQuery("SELECT *FROM users join bloods on users.blood_id = bloods.blood_id where city = ? and blood_id = ?");
             $this->db->execute([$city,$blood_id]);
             return $this->db->getResult();
         }
     }
+    public function getAllUser(){
+        $this->db->prepareQuery("SELECT * FROM users join bloods on users.blood_id = bloods.blood_id");
+        $this->db->execute();
+        return $this->db->getResult();
+    }
        
     
-     }
+ }

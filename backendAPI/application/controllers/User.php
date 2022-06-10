@@ -157,7 +157,8 @@ class User extends Controller
     public function getUsersByCityBlood(){
         if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
             $data = json_decode(file_get_contents("php://input"));
-           
+        //    var_dump($data);
+        //    die();
             $city = htmlentities($data->city);
             $blood = htmlentities($data->blood);
             $data  = $this->modelInstance->getUsersByCityBlood($city,$blood);
@@ -172,6 +173,19 @@ class User extends Controller
             }
             $this->response();
     }
+    }
+    public function getAllUser(){
+        $data  = $this->modelInstance->getAllUser();
+        if ($data) {
+            $this->res['data'] = $data;
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        } else {
+            $this->res['data'] = "No data";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+        $this->response();
     }
 }
 
