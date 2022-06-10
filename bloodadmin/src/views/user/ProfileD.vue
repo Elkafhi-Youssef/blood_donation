@@ -16,7 +16,8 @@ export default {
         Header,
         ProfileD,
         Footer
-    }
+    },
+    
 }
 
 </script>
