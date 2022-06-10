@@ -19,8 +19,11 @@
       </div>
     </div>
     <div class=" mt-3">
-      <div v-if = "donors.length!= 0"  class="mx-2 sm:mx-8 md:mx-16 flex justify-center gap-2 flex-wrap">
-        <div  v-for = "item in donors " key="item.user_id" @click="showprofile" class="flex flex-col text-center w-64  cursor-pointer">
+      <div  class="mx-2 sm:mx-8 md:mx-16 flex justify-center gap-2 flex-wrap">
+        <div v-if="donors.lenght">
+          <h1> sorry no found any user</h1>
+        </div>
+        <div  v-for = "item in donors " key="item.user_id" @click="showprofile(item.user_id)" class="flex flex-col text-center w-64  cursor-pointer">
           <div class="h-48">
             <img
               class="mx-auto w-full h-full object-fill"
@@ -31,14 +34,14 @@
           <div @click="showprofile" class="text-white w-full bg-second_col">
             <div class="flex flex-col mx-auto">
               <h2 class="text-lg mt-3 font-bold">{{item.fullname}}</h2>
-              <h3>Blood group A+</h3>
+              <h3>Blood group {{item.blood_type}}</h3>
               <div class="mt-2 flex w-20 mx-auto">
                 <img
                   class="w-6 h-6 mb-2"
                   src="@/assets/img/btimesicon.png"
                   alt=""
                 />
-                <span class="mt-1 text-sm">22 Times</span>
+                <span class="mt-1 text-sm">{{item.times}} Times</span>
               </div>
             </div>
           </div>
@@ -46,7 +49,6 @@
       </div>
     </div>
   </div>
-  {{donors}}
         <Footer/>
     </div>
 </template>
@@ -74,19 +76,31 @@ export default {
         }
     },
     methods :{
-        showprofile(){
-            // this.$router.push('/profiled')
-            console.log("profile");
-        }
+        async showprofile(id){
+          // if(localStorage.getItem('idProfileDonor')){
+          //   localStorage.setItem('idProfileDonor',id);
 
+          // }else{
+          //   localStorage.
+          // }
+            localStorage.setItem('idProfileDonor',id);
+
+          await this.$store.dispatch('getProfileDonor',id);
+            this.$router.push("/profiled");
+          
+        }
     },
- async  mounted() {
-  // this.getusersshome();
- await this.$store.dispatch("searchDonors");
-  // this.getusers();
- this.donors = await this.$store.state.donors;
-  console.log(this.$store.state.donors);
-},
+    computed:{
+       donors(){
+           return this.$store.state.donors
+       }
+    },
+    async mounted(){
+        await this.$store.dispatch('donors')
+        if(this.donors.lenght< 0){
+            this.donors = this.$store.state.donors
+        }
+    }
 }
 
 </script>
