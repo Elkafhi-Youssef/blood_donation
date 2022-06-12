@@ -13,16 +13,16 @@
       }"
     >
       <div
-        class="mb-4 sm:mb-8 md:mb-16 text-2xl text-center text-black font-extrabold w-fit sm:text-4xl md:text-5xl"
+        class="mb-4 sm:mb-8 md:mb-16 text-2xl text-center text-black font-extrabold w-fit sm:text-4xl md:text-5xl flex-1"
       >
         <h3>Avaiable Blood Donors</h3>
       </div>
     </div>
     <div class=" mt-3">
       <div  class="mx-2 sm:mx-8 md:mx-16 flex justify-center gap-2 flex-wrap">
-        <div v-if="donors.lenght">
+        <!-- <div v-if="donors.length">
           <h1> sorry no found any user</h1>
-        </div>
+        </div> -->
         <div  v-for = "item in donors " key="item.user_id" @click="showprofile(item.user_id)" class="flex flex-col text-center w-64  cursor-pointer">
           <div class="h-48">
             <img
@@ -31,7 +31,7 @@
               alt=""
             />
           </div>
-          <div @click="showprofile" class="text-white w-full bg-second_col">
+        <div @click="showprofile" class="text-white w-full bg-second_col">
             <div class="flex flex-col mx-auto">
               <h2 class="text-lg mt-3 font-bold">{{item.fullname}}</h2>
               <h3>Blood group {{item.blood_type}}</h3>
@@ -77,32 +77,26 @@ export default {
     },
     methods :{
         async showprofile(id){
-          // if(localStorage.getItem('idProfileDonor')){
-          //   localStorage.setItem('idProfileDonor',id);
-
-          // }else{
-          //   localStorage.
-          // }
-            localStorage.setItem('idProfileDonor',id);
-
+          localStorage.setItem('idProfileDonor',id);
           await this.$store.dispatch('getProfileDonor',id);
-            this.$router.push("/profiled");
-          
+          this.$router.push("/profiled");
         }
     },
     computed:{
        donors(){
-           return this.$store.state.donors
+         this.donors = this.$store.state.donors
+         console.log('i am in donors');
+          console.log(this.donors);
+        return this.$store.state.donors
        }
     },
     async mounted(){
+      if(this.donors.length < 1){
         await this.$store.dispatch('donors')
-        if(this.donors.lenght< 0){
-            this.donors = this.$store.state.donors
+        this.donors = this.$store.state.donors
         }
     }
 }
-
 </script>
 
 <style  scoped>
