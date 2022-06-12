@@ -53,7 +53,7 @@
                   >Phone number</label
                 >
                 <input
-                  type="number"
+                  type="tel"
                   v-model="user.phone"
                   name="phone"
                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-third_col rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-second_col focus:outline-none"
@@ -61,6 +61,7 @@
                   aria-describedby="phone"
                   placeholder="Enter Phone number"
                 />
+                
               </div>
               <div class="form-group mb-0 min-w-[360px]">
                 <label
@@ -103,7 +104,7 @@
                 <select
                   v-model="user.role"
                   name="role"
-                  id=""
+                  id="role"
                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-third_col rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-second_col focus:outline-none"
                 >
                   <option value="">Select</option>
@@ -288,8 +289,6 @@ export default {
     },
     register() {
       this.$store.dispatch("registeruser", {user :this.user,file : this.file}).then(() => {
-       
-        return true;
         this.$router.push("/loginuser");
         createToast({
             title: 'Success',
