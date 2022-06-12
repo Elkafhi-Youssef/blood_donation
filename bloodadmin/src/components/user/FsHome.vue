@@ -126,7 +126,6 @@ export default {
     return {
       fsHomeimg: require("@/assets/img/fsHome.png"),
       typeBlood :'',
-     
     };
     },
    
@@ -134,14 +133,8 @@ export default {
     
 },
 async mounted() {
-  // this.getusersshome();
  await this.$store.dispatch("getBloodTypes");
-  // this.getusers();
   this.typeBlood = this.$store.state.typeBlood;
-  console.log(this.typeBlood[1]);
-
-
-
 },
 };
 </script>

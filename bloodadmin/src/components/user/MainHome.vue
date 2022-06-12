@@ -80,6 +80,7 @@ export default {
         city: this.selecTCity,
         blood: this.selectBlood,
       };
+      console.log('data main home',data);
       await this.$store.dispatch('searchDonor',data)
       this.toDonors();
   },
@@ -94,6 +95,7 @@ export default {
   async mounted() {
     await this.$store.dispatch("getAllCities");
     this.cities = this.$store.state.cities;
+    
   },
 }
 

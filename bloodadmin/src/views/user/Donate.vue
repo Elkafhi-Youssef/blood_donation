@@ -162,9 +162,34 @@
         </div>
       </div>
     </div>
+    <button @click="gettoken" class="
+                w-full
+                px-6
+                py-2.5
+                bg-third_col
+                text-black
+                hover:text-white
+                font-medium
+                text-xs
+                leading-tight
+                uppercase
+                rounded
+                shadow-md
+                hover:bg-second_col hover:shadow-lg
+                focus:bg-second_col
+                focus:shadow-lg
+                focus:outline-none
+                focus:ring-0
+                active:bg-second_col active:shadow-lg
+                transition
+                duration-150
+                ease-in-out
+              ">
+             get token
+            </button>
     <div>
       <h1>
-        {{ selecTHospital }}
+       
       </h1>
     </div>
     <Footer />
@@ -204,6 +229,15 @@ export default {
     async getHospitals(event) {
       this.selecTCity = event.target.value;
       this.$store.dispatch('getHospitals', this.selecTCity);
+    },
+   async  gettoken(){
+       const token  = localStorage.getItem("token");
+      await this.$store.dispatch("isTokenExpired",token);
+      if(this.$store.state.tokenExpired === true){
+        console.log('token expired');
+      }else{
+        console.log('token not expired expired');
+      }
     },
    check(){ 
         if (this.selecTCity == "" || this.selecTHospitalname == "" || this.appdate == "" || this.appdate == "" ) {
@@ -304,6 +338,16 @@ export default {
   },
 
   async mounted() {
+     const token  = localStorage.getItem("token");
+    await this.$store.dispatch("isTokenExpired",token);
+    console.log('value of state',this.$store.state.tokenExpired);
+     if(this.$store.state.tokenExpired ==true){
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("idProfileDonor");
+      this.$router.push("/loginuser");
+      console.log(" here token expired");
+    }else console.log("token not expired");
     await this.$store.dispatch("getAllCitiesHospitals");
     this.cities = this.$store.state.citiesHospitals;
   },
