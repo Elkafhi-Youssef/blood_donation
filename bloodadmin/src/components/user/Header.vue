@@ -67,16 +67,17 @@
                 >
               </li>
               <li>
-                <router-link to="/donors"
-                  class="block py-2 pr-4 pl-3 text-white border-gray-100 md:border-0 md:p-0 hover:text-second_col"
-                  >Donors</router-link
+                <a
+                @click="donors"
+                  class="block py-2 pr-4 pl-3 text-white border-gray-100 md:border-0 md:p-0 hover:text-second_col cursor-pointer"
+                  >Donors</a
                 >
               </li>
               <li>
-                <a
-                  href="#"
+                <ra
+                @click="donate"
                   class="block py-2 pr-4 pl-3 text-white border-gray-100 md:border-0 md:p-0 hover:text-second_col"
-                  >Donate</a
+                  >Donate</ra
                 >
               </li>
               <li>
@@ -131,8 +132,8 @@
                       class="absolute right-0 z-20 w-48 py-1 mt-2 bg-white rounded-lg shadow-xl"
                     >
                       <a 
-                      @click="logout"
-                        class="px-4 py-2 flex rounded-md text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
+                      @click="profileuser"
+                        class="px-4 py-2 flex rounded-md text-sm text-gray-700 hover:bg-second_col hover:text-white cursor-pointer">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           class="h-5 w-5 mr-1"
@@ -209,6 +210,11 @@
 <script>
 import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
+import { defineComponent } from "vue";
+// import the library
+import { createToast } from "mosha-vue-toastify";
+// import the styling for the toast
+import "mosha-vue-toastify/dist/style.css";
 export default {
   name: "Header",
   data() {
@@ -230,7 +236,58 @@ export default {
       console.log("logout");
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      localStorage.removeItem("idProfileDonor");
       this.$router.push("/loginuser");
+    },
+   async donors() {
+     if(!localStorage.getItem('token')){
+        createToast(
+          {
+            title: "warning!",
+            description: "Please make sure to log in first",
+          },
+          {
+            showIcon: "true",
+            showCloseButton: "true",
+            swipeClose: "true",
+            toastBackgroundColor: "red",
+            type: "warning",
+          }
+        );
+        this.$router.push("/loginUser");
+     }else{
+       const donors =await this.$store.dispatch("donors")
+      this.$router.push("/donors");
+     }
+    },
+    async profileuser() {
+      const user  = localStorage.getItem("user");
+      const id = JSON.parse (user).user_id;
+      console.log(id);
+       await this.$store.dispatch("profileuser",id)
+      this.$router.push("/profileuser");
+     
+    },
+    async donate() {
+     if(!localStorage.getItem('token')){
+        createToast(
+          {
+            title: "warning!",
+            description: "Please make sure to log in first",
+          },
+          {
+            showIcon: "true",
+            showCloseButton: "true",
+            swipeClose: "true",
+            toastBackgroundColor: "red",
+            type: "warning",
+          }
+        );
+        this.$router.push("/loginUser");
+     }else{
+       
+      this.$router.push("/donate");
+     }
     },
     // logout: function () {
     // this.$store.dispatch(AUTH_LOGOUT)

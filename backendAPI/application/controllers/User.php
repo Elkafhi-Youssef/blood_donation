@@ -13,6 +13,21 @@ class User extends Controller
     public function index(){
         echo "Hello World, I'm in index from user controller";
     }
+    public function isTokenExpired(){
+        if ($token = Auth::isValideToken()) {
+            $this->res['message'] = "success";
+            $this->res['err'] = false;
+
+            $this->res['data'] = "This is secret";
+            $this->res['code'] = 200;
+            $this->res['token'] = $token;
+        }else {
+            $this->res['err'] = true;
+            $this->res['message'] = "token expired";
+            $this->res['token'] = $token;
+         }
+        $this->response();
+       }
     public function register(){
         if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
             $fullname = htmlentities($_POST['fullname']);
@@ -63,7 +78,7 @@ class User extends Controller
             if($check){
                 if(password_verify($password, $check['password']))
                 {
-                    $token = Auth::jwt_encode(66 * 66, $check);
+                    $token = Auth::jwt_encode(30, $check);
                     $this->res['token'] = $token;
                     $this->res['message'] = 'success';
                     $this->res['alert'] = 'You have successfully logged in';
@@ -86,14 +101,13 @@ class User extends Controller
     }
     public function top_secret()
     {
-
         if ($token = Auth::isValideToken()) {
             $this->res['data'] = "This is secret";
             $this->res['code'] = 200;
             $this->res['token'] = $token;
         } else {
             $this->res['data'] = "No data";
-            $this->res['message'] = "failed";
+            $this->res['message'] = "session expired";
             $this->res['alert'] = "Unauthorized user";
             $this->res['code'] = 404;
             $this->res['token'] = $token;
@@ -176,6 +190,19 @@ class User extends Controller
     }
     public function getAllUser(){
         $data  = $this->modelInstance->getAllUser();
+        if ($data) {
+            $this->res['data'] = $data;
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        } else {
+            $this->res['data'] = "No data";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+        $this->response();
+    }
+    public function profile($id){
+        $data  = $this->modelInstance->getUser($id);
         if ($data) {
             $this->res['data'] = $data;
             $this->res['code'] = 200;
