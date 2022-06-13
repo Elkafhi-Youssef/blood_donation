@@ -108,8 +108,8 @@
                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-third_col rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-second_col focus:outline-none"
                 >
                   <option value="">Select</option>
-                  <option value="1">Donor</option>
-                  <option value="2">Recipient</option>
+                  <option value="donor">Donor</option>
+                  <option value="patient">Patient</option>
                 </select>
               </div>
               <div class="form-group mb-0 min-w-[360px]">
