@@ -72,111 +72,18 @@
           </div>
         </div>
       </div>
-      <div class=" border border-red-600 ">
-          <div>
-              <ul class=" flex justify-center ">
-                  <li class="block  border-gray-100 md:border-0 md:p-0 hover:text-second_col active:bg-second_col cursor-pointer visited:bg-second_col">new request</li>
-                  <li class="block   border-gray-100 md:border-0 md:p-0 hover:text-second_col active:bg-second_col cursor-pointer visited:bg-second_col">new request</li>
-                  <li class="block   border-gray-100 md:border-0 md:p-0 hover:text-second_col active:bg-second_col cursor-pointer visited:bg-second_col">new request</li>
-                  <li class="block   border-gray-100 md:border-0 md:p-0 hover:text-second_col active:bg-second_col cursor-pointer visited:bg-second_col">new request</li>
-                  
+      <div class="  ">
+          <div class=" mb-5 flex justify-center">
+              <ul class=" flex justify-center border-b-2 border-second_col w-fit ">
+                  <li class="block  border-gray-100 md:border-0 md:p-0 hover:text-second_col  mx-2 cursor-pointer"><router-link to="/profileuser/newrequests"> New</router-link></li>
+                  <li class="block  border-gray-100 md:border-0 md:p-0 hover:text-second_col  mx-2 cursor-pointer"><router-link to="/profileuser/appointmentRequests"> Appointments</router-link></li>
+                  <li class="block  border-gray-100 md:border-0 md:p-0 hover:text-second_col  mx-2 cursor-pointer"><router-link to="/profileuser/accepted"> Completed</router-link></li>
+                  <li class="block  border-gray-100 md:border-0 md:p-0 hover:text-second_col  mx-2 cursor-pointer"><router-link to="/profileuser/cancelRequests"> Canceled</router-link></li>        
               </ul>
           </div>
-          <div class="border border-green-600 w-[90%] mx-auto flex justify-center flex-wrap gap-2 mb-4">
-              <div class=" border border-yellow-500 w-[18rem]">
-                  <div class = " flex justify-between text-xs mb-6 w-[95%] mx-auto mt-1 ">
-                      <span>22/22/2022</span>
-                      <span>status:new</span>
-                  </div>
-                  <div class=" w-[95%] mx-auto">
-                      <p class=" text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quidem officiis error vel </p>
-                  </div>
-                   <div class="overflow-hidden">
-                  <table class="min-w-full">
-
-                    <tbody>
-                      <tr class="bg-white border-none transition duration-300 ease-in-out hover:bg-third_col">
-                        <td class="px-6 py-2whitespace-nowrap font-medium">Blood request</td>
-                        <td class=" text-base  font-light px-6 py-2 whitespace-nowrap">
-                          {{ profileuser.age }}
-                        </td>
-
-                      </tr>
-                      <tr class="bg-white border-none transition duration-300 ease-in-out hover:bg-third_col">
-                        <td class="px-6 py-2 whitespace-nowrap  font-medium  ">Phone</td>
-                        <td class=" text-base  font-light px-6 py-2 whitespace-nowrap">
-                          {{ profileuser.phone }}
-                        </td>
-
-                      </tr>
-                      <tr class="bg-white border-none transition duration-300 ease-in-out hover:bg-third_col">
-                        <td class="px-6 py-2 whitespace-nowrap  font-medium ">User Type</td>
-                        <td class=" text-base  font-light px-6 py-2 whitespace-nowrap">
-                          {{ profileuser.role }}
-                        </td>
-
-                      </tr>
-                      <tr class="bg-white border-none transition duration-300 ease-in-out hover:bg-third_col">
-                        <td class="px-6 py-2 whitespace-nowrap font-medium "> Blood Type</td>
-                        <td class=" text-base  font-light px-6 py-2 whitespace-nowrap">
-                          {{ profileuser.blood_type }}
-                        </td>
-
-                      </tr>
-                      
-
-
-                    </tbody>
-                  </table>
-                   </div>
-              </div>
-               <div class=" border border-yellow-500 w-[18rem]">
-                  <div class = " flex justify-between text-xs mb-6 w-[95%] mx-auto mt-1 ">
-                      <span>22/22/2022</span>
-                      <span>status:new</span>
-                  </div>
-                  <div class=" w-[95%] mx-auto">
-                      <p class=" text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quidem officiis error vel </p>
-                  </div>
-                   <div class="overflow-hidden">
-                  <table class="min-w-full">
-
-                    <tbody>
-                      <tr class="bg-white border-none transition duration-300 ease-in-out hover:bg-third_col">
-                        <td class="px-6 py-2whitespace-nowrap font-medium">Blood request</td>
-                        <td class=" text-base  font-light px-6 py-2 whitespace-nowrap">
-                          {{ profileuser.age }}
-                        </td>
-
-                      </tr>
-                      <tr class="bg-white border-none transition duration-300 ease-in-out hover:bg-third_col">
-                        <td class="px-6 py-2 whitespace-nowrap  font-medium  ">Phone</td>
-                        <td class=" text-base  font-light px-6 py-2 whitespace-nowrap">
-                          {{ profileuser.phone }}
-                        </td>
-
-                      </tr>
-                      <tr class="bg-white border-none transition duration-300 ease-in-out hover:bg-third_col">
-                        <td class="px-6 py-2 whitespace-nowrap  font-medium ">User Type</td>
-                        <td class=" text-base  font-light px-6 py-2 whitespace-nowrap">
-                          {{ profileuser.role }}
-                        </td>
-
-                      </tr>
-                      <tr class="bg-white border-none transition duration-300 ease-in-out hover:bg-third_col">
-                        <td class="px-6 py-2 whitespace-nowrap font-medium "> Blood Type</td>
-                        <td class=" text-base  font-light px-6 py-2 whitespace-nowrap">
-                          {{ profileuser.blood_type }}
-                        </td>
-
-                      </tr>
-                      
-
-
-                    </tbody>
-                  </table>
-                   </div>
-              </div>
+          <div class=" w-[90%] mx-auto flex justify-center flex-wrap gap-3 mb-4 py-5">
+              <router-view/>
+              
           </div>
       </div>
         <Footer/>
@@ -200,11 +107,20 @@ export default {
         return this.$store.state.profile
         }
     },
+    async  mounted(){
+       const user  = localStorage.getItem("user");
+      const id = JSON.parse (user).user_id;
+      console.log(id);
+       await this.$store.dispatch("profileuser",id)
+    }
     
 }
 
 </script>
 
 <style  scoped>
+ .router-link-active{
+  color: red;
+}
 
 </style>
