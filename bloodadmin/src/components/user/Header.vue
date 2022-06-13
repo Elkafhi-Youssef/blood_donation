@@ -76,7 +76,7 @@
               <li>
                 <ra
                 @click="donate"
-                  class="block py-2 pr-4 pl-3 text-white border-gray-100 md:border-0 md:p-0 hover:text-second_col"
+                  class="block py-2 pr-4 pl-3 text-white border-gray-100 md:border-0 md:p-0 hover:text-second_col cursor-pointer"
                   >Donate</ra
                 >
               </li>
@@ -263,9 +263,16 @@ export default {
     async profileuser() {
       const user  = localStorage.getItem("user");
       const id = JSON.parse (user).user_id;
+      const role = JSON.parse (user).role;
       console.log(id);
-       await this.$store.dispatch("profileuser",id)
-      this.$router.push("/profileuser/newrequests");
+      console.log(role);
+      if(role == "donor"){
+        await this.$store.dispatch("profileuser",id)
+       this.$router.push("/profileuser/newrequests");
+      }else if(role == "patient"){
+        await this.$store.dispatch("profileuser",id)
+       this.$router.push("/profilepatient/newrequestspatient");
+      }
      
     },
     async donate() {
@@ -309,4 +316,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+ a .router-link-exact-active {
+  color: red;
+  }
+</style>
