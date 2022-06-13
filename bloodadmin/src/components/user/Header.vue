@@ -265,7 +265,7 @@ export default {
       const id = JSON.parse (user).user_id;
       console.log(id);
        await this.$store.dispatch("profileuser",id)
-      this.$router.push("/profileuser");
+      this.$router.push("/profileuser/newrequests");
      
     },
     async donate() {
