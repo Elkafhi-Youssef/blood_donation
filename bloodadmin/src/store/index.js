@@ -64,6 +64,9 @@ export default createStore({
     citiesHospitals: [],
     tokenExpired: false,
     profile: {},
+    newRequest: {},
+    appointmentRequests:[],
+    cancelRequests:[]
   },
   //==============================Getters============================================
   getters: {
@@ -109,6 +112,15 @@ export default createStore({
     SET_PROFILEUSER(state, profile) {
       state.profile = profile;
     },
+    SET_NEWREQUEST(state, newRequest) {
+      state.newRequest = newRequest;
+    },
+    SET_APPREQUEST(state,appointment){
+      state.appointmentRequests = appointment;
+    },
+    SET_CANCELREQUEST(state, cancelRequest){
+      state.cancelRequests = cancelRequest
+    }
   },
   //========================Actions==================================
   actions: {
@@ -122,10 +134,9 @@ export default createStore({
         },
       };
 
-      axios(config)
+      await axios(config)
         .then(function (response) {
-          console.log(response.data);
-          if ((response.data.err == true)) {
+          if ((response.data.err)) {
             commit("SET_TOKEN_EXPIRED", true);
           }
         })
@@ -213,22 +224,7 @@ export default createStore({
       const response = await axios.post(config.url, CBdata);
       const data = await response.data.data;
       const message = await response.data.message;
-
       commit("SET_DONORS", response.data.data);
-
-      //   .then( (response)=> {
-      //     if(response.data.message === 'success') {
-      //     console.log(response.data.data);
-      //     commit('SET_DONORS', response.data.data);
-      //   }else{
-      //     console.log('error');
-      //   }
-      // }
-      //   )
-      //   .catch( (error) => {
-      //     console.log(error);
-      //   }
-      //   );
     },
     async searchDonors({ commit, state }) {
       const dataa = JSON.stringify(state.data);
@@ -280,6 +276,121 @@ export default createStore({
       const data = await response.data.data;
       commit("SET_CITIESHOSPITALS", response.data.data);
     },
+    async getNewRequest({ commit }, data) {
+      console.log("id",data.id);
+      console.log("token",data.token);
+      var config = {
+        method: 'get',
+        url: 'http://127.0.0.1/BLOOD_DONATION/backendAPI/Request/getNewRequest/'+data.id,
+        headers: { 
+          'Authorization': `Bearer ${data.token}`
+        }
+      };
+      
+     await axios(config)
+      .then(function (response) {
+        if (response.data.err) {
+          // commit("SET_TOKEN_EXPIRED", true);
+        }else if(response.data.message == "success"){
+          commit("SET_NEWREQUEST",(response.data.data));
+        }else{
+          console.log('no data')
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+    async getAppointmentRequests({ commit }, data) {
+      console.log("id",data.id);
+      console.log("token",data.token);
+      var config = {
+        method: 'get',
+        url: 'http://127.0.0.1/BLOOD_DONATION/backendAPI/Request/getAppRequest/'+data.id,
+        headers: { 
+          'Authorization': `Bearer ${data.token}`
+        }
+      };
+      
+     await axios(config)
+      .then(function (response) {
+        if (response.data.err) {
+          commit("SET_TOKEN_EXPIRED", true);
+        }else if(response.data.message == "success"){
+          commit("SET_APPREQUEST",(response.data.data));
+        }else{
+          console.log('no data')
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+    async getCancelRequests({ commit }, data) {
+      console.log("id",data.id);
+      console.log("token",data.token);
+      var config = {
+        method: 'get',
+        url: 'http://127.0.0.1/BLOOD_DONATION/backendAPI/Request/getCancelRequest/'+data.id,
+        headers: { 
+          'Authorization': `Bearer ${data.token}`
+        }
+      };
+      
+     await axios(config)
+      .then(function (response) {
+        if (response.data.err) {
+          commit("SET_TOKEN_EXPIRED", true);
+        }else if(response.data.message == "success"){
+          commit("SET_CANCELREQUEST",(response.data.data));
+        }else{
+          console.log('no data')
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+    async acceptRequest({ commit }, id) {
+      console.log("id",id);
+      
+      var config = {
+        method: 'post',
+        url: 'http://127.0.0.1/BLOOD_DONATION/backendAPI/Request/acceptRequest/'+id,
+        headers: { 
+          "Content-Type": "application/json",
+        }
+      };
+      
+     await axios(config)
+      .then(function (response) {
+        console.log('xof ga3 response',response.data.message);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+    
+    async cancelRequest({ commit }, id) {
+      console.log("id",id);
+      
+      var config = {
+        method: 'post',
+        url: 'http://127.0.0.1/BLOOD_DONATION/backendAPI/Request/cancelRequest/'+id,
+        headers: { 
+          "Content-Type": "application/json",
+        }
+      };
+      
+     await axios(config)
+      .then(function (response) {
+        console.log('xof ga3 response',response.data.message);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+  
   },
   modules: {
     Users,
