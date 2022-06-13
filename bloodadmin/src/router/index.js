@@ -13,8 +13,12 @@ import ProfileD from '../views/user/ProfileD.vue'
 import ProfileUser from '../views/user/ProfileUser.vue'
 import NewRequests from '../components/user/NewRequests.vue'
 import AppointmentRequests from '../components/user/AppointmentRequests.vue'
+import AppointmentRequestsPatient from '../components/user/AppointmentRequestsPatient.vue'
 import cancelRequests from '../components/user/CancelRequests.vue'
 import CompletRequests from '../components/user/CompletRequests.vue'
+import NewRequestsPatient from '../components/user/NewRequestsPatient.vue'
+import CancelRequestsPatient from '../components/user/CancelRequestsPatient.vue'
+import ProfilePatient from '../views/user/ProfilePatient.vue'
 const routes = [
   
 
@@ -89,6 +93,25 @@ const routes = [
       {
         path: '/profileuser/completRequests',
         component: CompletRequests,
+      },
+    ],
+  },
+  {
+    path: '/profilepatient',
+    name: 'profilepatient',
+    component: ProfilePatient,
+    children: [
+      {
+        path: '/profilepatient/newrequestspatient',
+        component: NewRequestsPatient,
+      },
+      {
+        path: '/profilepatient/appointmentrequestspatient',
+        component: AppointmentRequestsPatient,
+      },
+      {
+        path: '/profilepatient/cancelrequestspatient',
+        component: CancelRequestsPatient,
       },
     ],
   },
