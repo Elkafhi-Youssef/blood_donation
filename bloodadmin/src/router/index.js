@@ -11,6 +11,10 @@ import Donors from '../views/user/Donors.vue'
 import Donate from '../views/user/Donate.vue'
 import ProfileD from '../views/user/ProfileD.vue'
 import ProfileUser from '../views/user/ProfileUser.vue'
+import NewRequests from '../components/user/NewRequests.vue'
+import AppointmentRequests from '../components/user/AppointmentRequests.vue'
+import cancelRequests from '../components/user/CancelRequests.vue'
+import CompletRequests from '../components/user/CompletRequests.vue'
 const routes = [
   
 
@@ -62,12 +66,31 @@ const routes = [
   {
     path: '/profiled',
     name: 'profiled',
-    component: ProfileD
+    component: ProfileD,
+    
   },
   {
     path: '/profileuser',
     name: 'profileuser',
-    component: ProfileUser
+    component: ProfileUser,
+    children: [
+      {
+        path: '/profileuser/newrequests',
+        component: NewRequests,
+      },
+      {
+        path: '/profileuser/appointmentRequests',
+        component: AppointmentRequests,
+      },
+      {
+        path: '/profileuser/cancelRequests',
+        component: cancelRequests,
+      },
+      {
+        path: '/profileuser/completRequests',
+        component: CompletRequests,
+      },
+    ],
   },
   {
     path: '/donate',
@@ -89,6 +112,7 @@ router.beforeEach((to, from) => {
     if (!localStorage.getItem("token")) {
       router.push("/LoginUser");
     }
+   
   }
   // if (to.name === "Login" ||  to.name === "Register" | to.name === "Role") {
   //   if (localStorage.getItem("Role")) {
