@@ -66,7 +66,10 @@ export default createStore({
     profile: {},
     newRequest: {},
     appointmentRequests:[],
-    cancelRequests:[]
+    cancelRequests:[],
+    newRequestsPatient:[],
+    appointmentRequestsPatient:[],
+    cancelRequestsPatient:[],
   },
   //==============================Getters============================================
   getters: {
@@ -115,12 +118,23 @@ export default createStore({
     SET_NEWREQUEST(state, newRequest) {
       state.newRequest = newRequest;
     },
+    SET_NEWREQUESTPATIENT(state, newRequestPatient) {
+      state.newRequestsPatient = newRequestPatient;
+    },
     SET_APPREQUEST(state,appointment){
       state.appointmentRequests = appointment;
     },
     SET_CANCELREQUEST(state, cancelRequest){
       state.cancelRequests = cancelRequest
+    },
+    SET_APPREQUESTPATIENT(state,appointmentPatient){
+      state.appointmentRequestsPatient = appointmentPatient;
+    },
+    SET_CANCELREQUESTPATIENT(state,cancelRequestPatient){
+      state.cancelRequestsPatient = cancelRequestPatient;
     }
+    
+
   },
   //========================Actions==================================
   actions: {
@@ -144,7 +158,6 @@ export default createStore({
           console.log(error);
         });
     },
-
     async profileuser({ commit }, id) {
       const config = {
         headers: {
@@ -207,7 +220,6 @@ export default createStore({
       const data = await response.data;
       commit("SET_CITIES", response.data.data);
     },
-
     async searchDonor({ commit }, CBdata) {
       commit("SET_DATASEARCH", CBdata.blood, CBdata.city);
       console.log(CBdata);
@@ -326,6 +338,31 @@ export default createStore({
         console.log(error);
       });
     },
+    async getAppointmentRequestsPatient({ commit }, data) {
+      console.log("id",data.id);
+      console.log("token",data.token);
+      var config = {
+        method: 'get',
+        url: 'http://127.0.0.1/BLOOD_DONATION/backendAPI/Request/getAppointmentRequestsPatient/'+data.id,
+        headers: { 
+          'Authorization': `Bearer ${data.token}`
+        }
+      };
+      
+     await axios(config)
+      .then(function (response) {
+        if (response.data.err) {
+          commit("SET_TOKEN_EXPIRED", true);
+        }else if(response.data.message == "success"){
+          commit("SET_APPREQUESTPATIENT",(response.data.data));
+        }else{
+          console.log('no data')
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
     async getCancelRequests({ commit }, data) {
       console.log("id",data.id);
       console.log("token",data.token);
@@ -343,6 +380,31 @@ export default createStore({
           commit("SET_TOKEN_EXPIRED", true);
         }else if(response.data.message == "success"){
           commit("SET_CANCELREQUEST",(response.data.data));
+        }else{
+          console.log('no data')
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+    async getCancelRequestsPatient({ commit }, data) {
+      console.log("id",data.id);
+      console.log("token",data.token);
+      var config = {
+        method: 'get',
+        url: 'http://127.0.0.1/BLOOD_DONATION/backendAPI/Request/getCancelRequestsPatient/'+data.id,
+        headers: { 
+          'Authorization': `Bearer ${data.token}`
+        }
+      };
+      
+     await axios(config)
+      .then(function (response) {
+        if (response.data.err) {
+          commit("SET_TOKEN_EXPIRED", true);
+        }else if(response.data.message == "success"){
+          commit("SET_CANCELREQUESTPATIENT",(response.data.data));
         }else{
           console.log('no data')
         }
@@ -370,7 +432,6 @@ export default createStore({
         console.log(error);
       });
     },
-    
     async cancelRequest({ commit }, id) {
       console.log("id",id);
       
@@ -390,7 +451,31 @@ export default createStore({
         console.log(error);
       });
     },
-  
+    async getNewRequestPatient({ commit }, data) {
+      console.log("id",data.id);
+      console.log("token",data.token);
+      var config = {
+        method: 'get',
+        url: 'http://127.0.0.1/BLOOD_DONATION/backendAPI/Request/getNewRequestPatient/'+data.id,
+        headers: { 
+          'Authorization': `Bearer ${data.token}`
+        }
+      };
+      
+     await axios(config)
+      .then(function (response) {
+        if (response.data.err) {
+          // commit("SET_TOKEN_EXPIRED", true);
+        }else if(response.data.message == "success"){
+          commit("SET_NEWREQUESTPATIENT",(response.data.data));
+        }else{
+          console.log('no data')
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
   },
   modules: {
     Users,
