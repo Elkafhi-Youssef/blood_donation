@@ -47,6 +47,108 @@ class Request extends Controller
         }
         $this->response();
     }
+    public function getNewRequest($id){
+        if ($token = Auth::isValideToken()) {
+        $data = $this->modelInstance->getNewRequest($id);
+        
+        if($data){
+            $this->res['data'] = $data;
+            $this->res['alert'] = "";
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        }
+        else{
+            $this->res['data'] = "No data";
+            $this->res['alert'] = "";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+     }else{
+        $this->res['err'] = true;
+        $this->res['message'] = "token expired";
+        $this->res['token'] = $token;
+    
+     }
+        $this->response();
+    }
+    public function getAppRequest($id){
+        if ($token = Auth::isValideToken()) {
+        $data = $this->modelInstance->getAppRequest($id);
+        
+        if($data){
+            $this->res['data'] = $data;
+            $this->res['alert'] = "";
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        }
+        else{
+            $this->res['data'] = "No data";
+            $this->res['alert'] = "";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+     }else{
+        $this->res['err'] = true;
+        $this->res['message'] = "token expired";
+        $this->res['token'] = $token;
+    
+     }
+        $this->response();
+    }
+    public function getCancelRequest($id){
+        if ($token = Auth::isValideToken()) {
+        $data = $this->modelInstance->getCancelRequest($id);
+        if($data){
+            $this->res['data'] = $data;
+            $this->res['alert'] = "";
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        }
+        else{
+            $this->res['data'] = "No data";
+            $this->res['alert'] = "";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+     }else{
+        $this->res['err'] = true;
+        $this->res['message'] = "token expired";
+        $this->res['token'] = $token;
+    
+     }
+        $this->response();
+    }
+    public function acceptRequest($id){
+        $data = $this->modelInstance->acceptRequest($id);
+        if($data){
+            $this->res['data'] = $data;
+            $this->res['alert'] = "";
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        }
+        else{
+            $this->res['data'] = "No data";
+            $this->res['alert'] = "";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+    }
+
+    public function cancelRequest($id){
+        $data = $this->modelInstance->cancelRequest($id);
+        if($data){
+            $this->res['data'] = $data;
+            $this->res['alert'] = "";
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        }
+        else{
+            $this->res['data'] = "No data";
+            $this->res['alert'] = "";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+    }
    
    
     
