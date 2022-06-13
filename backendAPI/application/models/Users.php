@@ -43,16 +43,16 @@
             $this->db->prepareQuery("SELECT * FROM users join bloods on users.blood_id = bloods.blood_id WHERE users.role = 'donor' ");
             $this->db->execute();
             return $this->db->getResult();
-        }elseif($city == null && $blood_id != null){
-            $this->db->prepareQuery("SELECT * FROM users join bloods on users.blood_id = bloods.blood_id where blood_id = ? and users.role = 'donor' ");
+        }else if($city == null && $blood_id != null){
+            $this->db->prepareQuery("SELECT * FROM users join bloods on users.blood_id = bloods.blood_id where users.blood_id = ? and users.role = 'donor' ");
             $this->db->execute([$blood_id]);
             return $this->db->getResult();
-        }elseif($city != null && $blood_id == null){
-            $this->db->prepareQuery("SELECT *FROM users join bloods on users.blood_id = bloods.blood_id where city = ? and users.role = 'donor' ");
+        }else if($city != null && $blood_id == null){
+            $this->db->prepareQuery("SELECT *FROM users join bloods on users.blood_id = bloods.blood_id where users.city  = ? and users.role = 'donor' ");
             $this->db->execute([$city]);
             return $this->db->getResult();
         }else{
-            $this->db->prepareQuery("SELECT *FROM users join bloods on users.blood_id = bloods.blood_id where city = ? and blood_id = ? and users.role = 'donor' ");
+            $this->db->prepareQuery("SELECT *FROM users join bloods on users.blood_id = bloods.blood_id where users.city = ? and users.blood_id = ? and users.role = 'donor' ");
             $this->db->execute([$city,$blood_id]);
             return $this->db->getResult();
         }
