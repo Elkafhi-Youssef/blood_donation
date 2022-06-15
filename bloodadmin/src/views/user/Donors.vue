@@ -27,7 +27,7 @@
           <div class="h-48">
             <img
               class="mx-auto w-full h-full object-fill"
-              src="@/assets/img/moi.png"
+              :src="'http://127.0.0.1/BLOOD_DONATION/backendAPI/public/imgsProfile/'+item.image"
               alt=""
             />
           </div>
