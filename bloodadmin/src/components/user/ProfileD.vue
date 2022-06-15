@@ -7,7 +7,7 @@
           <h1>{{ donor.fullname }}</h1>
         </div>
         <div class="mt-4 flex justify-center">
-          <img class="mx-auto h-40 w-40 object-cover rounded-full" src="@/assets/img/moi.png" alt="" />
+          <img class="mx-auto h-40 w-40 object-cover rounded-full" :src="'http://127.0.0.1/BLOOD_DONATION/backendAPI/public/imgsProfile/'+donor.image" alt="" />
         </div>
         <div class="w-full my-8 ">
           <div class="flex flex-col">
@@ -80,6 +80,7 @@
             <div class="form-group mb-6">
               <label for="exampleInputEmail2" class="form-label inline-block mb-2 text-gray-700">Date</label>
               <input type="date"
+              :min="new Date().toISOString().substr(0, 10)"
                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-third_col rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-second_col focus:outline-none"
                 id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter when you need blood"
                 v-model="requestDate" />
@@ -222,6 +223,7 @@ export default {
                 type: "success",
               }
             );
+            redirectToPatientProfile();
           }
           else {
             createToast(
@@ -254,7 +256,11 @@ export default {
             }
           );
         });
+    },
+    redirectToPatientProfile(){
+      this.$router.push('/profilepatient/cancelrequestspatient');
     }
+
 
   },
   computed: {

@@ -108,7 +108,7 @@
                   >
                     <img
                       class="object-cover w-full h-full"
-                      src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=296&q=80"
+                      :src="'http://127.0.0.1/BLOOD_DONATION/backendAPI/public/imgsProfile/'+imageuser"
                       alt="Your avatar"
                     />
                   </button>
@@ -222,6 +222,7 @@ export default {
       menuIsopen: false,
       dropdownOpen: false,
       token: localStorage.getItem("token") ,
+      imageuser: JSON.parse (localStorage.getItem("user")).image ,
       // headermenu :[
       //   { to: '/', title: 'sign in',
       //     showButton: !this.$store.state.auth.isUserLoggedIn },
@@ -264,8 +265,6 @@ export default {
       const user  = localStorage.getItem("user");
       const id = JSON.parse (user).user_id;
       const role = JSON.parse (user).role;
-      console.log(id);
-      console.log(role);
       if(role == "donor"){
         await this.$store.dispatch("profileuser",id)
        this.$router.push("/profileuser/newrequests");
