@@ -19,6 +19,12 @@ import CompletRequests from '../components/user/CompletRequests.vue'
 import NewRequestsPatient from '../components/user/NewRequestsPatient.vue'
 import CancelRequestsPatient from '../components/user/CancelRequestsPatient.vue'
 import ProfilePatient from '../views/user/ProfilePatient.vue'
+import UpdteProfile from '../views/user/UpdateProfile.vue'
+import { defineComponent } from "vue";
+// import the library
+import { createToast } from "mosha-vue-toastify";
+// import the styling for the toast
+import "mosha-vue-toastify/dist/style.css";
 const routes = [
   
 
@@ -116,6 +122,11 @@ const routes = [
     ],
   },
   {
+    path:'/updateprofile/:id',
+    name:'upateprofile',
+    component:UpdteProfile
+  },
+  {
     path: '/donate',
     name: 'donate',
     component: Donate
@@ -128,6 +139,20 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
+  if (to.name === "donors" && JSON.parse (localStorage.getItem("user")).role=== "donor" ){
+    router.push("/");
+    createToast({
+      title: 'Error',
+      description: 'You are not authorized to access this page',
+      },
+      {
+      showIcon: 'true',
+      showCloseButton: 'true',
+      swipeClose: 'true',
+      toastBackgroundColor: 'red',
+      type: 'warning',
+      })
+  }
   if (
     to.name === "profiled" ||
     to.name === "donors" ||
