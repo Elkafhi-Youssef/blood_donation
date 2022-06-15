@@ -60,6 +60,36 @@ class User extends Controller
         }
         $this->response();
     }
+    public function updateProfile($id){
+        if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
+            $fullname = htmlentities($_POST['fullname']);
+            $phone = htmlentities($_POST['phone']);
+            $email = htmlentities($_POST['email']);
+            $city = htmlentities($_POST['city']);
+            $role = htmlentities($_POST['role']);
+            $blood_id = htmlentities($_POST['blood_id']);
+            $age = htmlentities($_POST['age']);
+            $image = $age.$role.$_FILES['image']['name'];
+            $image_tmp = $_FILES['image']['tmp_name'];
+            $image_destination = ROOT.DS.'public'.DS.'imgsProfile'.DS . $image;
+            move_uploaded_file($image_tmp, $image_destination);
+            $check =$this->modelInstance->updateProfile($fullname,$phone,$email,$city,$role,$blood_id,$age,$image,$id);
+            if($check){
+                $this->res['token'] = null;
+                $this->res['message'] = 'success';
+                $this->res['alert'] = 'You have successfully updated your information';
+            }else {
+                $this->res['token'] = null;
+                $this->res['message'] = 'error';
+                $this->res['alert'] = 'Something went wrong';
+            }
+        }else{
+            $this->res['token'] = null;
+            $this->res['message'] = 'error';
+            $this->res['alert'] = 'Something went wrong';
+        }
+        $this->response();
+    }
    
     public function login()
     {
@@ -78,7 +108,7 @@ class User extends Controller
             if($check){
                 if(password_verify($password, $check['password']))
                 {
-                    $token = Auth::jwt_encode(30, $check);
+                    $token = Auth::jwt_encode(300, $check);
                     $this->res['token'] = $token;
                     $this->res['message'] = 'success';
                     $this->res['alert'] = 'You have successfully logged in';

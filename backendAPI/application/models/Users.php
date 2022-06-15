@@ -12,6 +12,12 @@
             return $this->db->execute();
             
         }
+        public function updateProfile($fullname,$phone,$email,$city,$role,$blood_id,$age,$image,$id){
+            $this->db->prepareQuery("UPDATE `users` SET `fullname` = ?, `phone` = ?, `email` = ?, `city` = ?, `role` = ?, `blood_id` = ?, `age` = ?, `image` = ? WHERE `users`.`user_id` =?");
+            $this->db->bindValues([$fullname,$phone,$email,$city,$role,$blood_id,$age,$image,$id]);
+            return $this->db->execute();
+            
+        }
         public function login($email){
             $this->db->prepareQuery("SELECT * FROM users where email = ?");
             $this->db->execute([$email]);
