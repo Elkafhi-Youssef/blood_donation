@@ -7,6 +7,9 @@
           <img src="@/assets/img/imglogin.png" alt="" />
         </div>
         <div class="w-full md:w-1/2 p-7 min-w-[375px] ">
+          <div class="flex justify-center mb-10">
+            <h1 class="text-lg sm:text-2xl md:text-4xl">Login</h1>
+          </div>
           <form @submit.prevent="login">
             <div class="form-group mb-6 ">
               <label for="email" class="form-label inline-block mb-2 text-gray-700">Email address</label>
