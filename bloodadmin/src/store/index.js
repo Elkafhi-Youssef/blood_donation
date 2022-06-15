@@ -30,7 +30,7 @@ const Users = {
         data.append(key, tt.user[key]);
       }
       data.append("image", tt.file);
-
+     
       const config = {
         method: "post",
         url: "http://127.0.0.1/BLOOD_DONATION/backendAPI/User/register",
@@ -70,6 +70,7 @@ export default createStore({
     newRequestsPatient:[],
     appointmentRequestsPatient:[],
     cancelRequestsPatient:[],
+    isUpdateProfile:true,
   },
   //==============================Getters============================================
   getters: {
@@ -114,6 +115,7 @@ export default createStore({
     },
     SET_PROFILEUSER(state, profile) {
       state.profile = profile;
+      console.log("profile state", state.profile);
     },
     SET_NEWREQUEST(state, newRequest) {
       state.newRequest = newRequest;
@@ -132,8 +134,11 @@ export default createStore({
     },
     SET_CANCELREQUESTPATIENT(state,cancelRequestPatient){
       state.cancelRequestsPatient = cancelRequestPatient;
+    },
+    SET_ISUPDATEPROFILE(state,isupdateProfile){
+      state.isUpdateProfile = isupdateProfile;
     }
-    
+
 
   },
   //========================Actions==================================
@@ -159,6 +164,7 @@ export default createStore({
         });
     },
     async profileuser({ commit }, id) {
+      console.log("id which came to action is:", id);
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -171,6 +177,8 @@ export default createStore({
       const data = response.data;
       if (data.message == "success") {
         commit("SET_PROFILEUSER", response.data.data);
+      }else{
+        console.log("error");
       }
     },
     async isSidebarOpen({ commit }, isOpen) {
@@ -194,6 +202,33 @@ export default createStore({
       axios(config)
         .then((response) => {
           console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    async updateProfile({ commit }, tt) {
+      let data = new FormData();
+      for (let key in tt.user) {
+        data.append(key, tt.user[key]);
+      }
+      data.append("image", tt.file);
+      const user  = localStorage.getItem("user");
+      const id = JSON.parse (user).user_id;
+      const config = {
+        method: "post",
+        url: "http://127.0.0.1/BLOOD_DONATION/backendAPI/User/updateProfile/"+id,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then((response) => {
+          if(response.data.message == "success"){
+            commit("SET_ISUPDATEPROFILE",false);
+          }
         })
         .catch((error) => {
           console.log(error);
