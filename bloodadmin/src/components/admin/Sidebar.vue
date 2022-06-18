@@ -57,7 +57,7 @@
         <p class="pl-4 text-xs font-semibold mb-4 text-gray-400">GENERAL</p>
         <router-link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[$route.name === 'Dashboard' ? activeClass : inactiveClass]"
+          :class="[$route.name === 'dashboardusers' ? activeClass : inactiveClass]"
           to="/dashboard/users"
         >
           <svg
@@ -79,11 +79,21 @@
         </router-link>
          <router-link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[$route.name === 'Dashboard' ? activeClass : inactiveClass]"
+          :class="[$route.name === 'dashboardhospitals' ? activeClass : inactiveClass]"
           to="/dashboard/hospitals"
         >
           <svg class="w-5 h-5 "  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="3" y1="21" x2="21" y2="21" />  <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />  <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />  <line x1="10" y1="9" x2="14" y2="9" />  <line x1="12" y1="7" x2="12" y2="11" /></svg>
           <span class="mx-4">Hospitals</span>
+        </router-link>
+         <router-link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'addhospitaladmin' ? activeClass : inactiveClass]"
+          to="/dashboard/addhospital"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+          <span class="mx-4">AddHospital</span>
         </router-link>
       </nav>
     </div>
@@ -99,7 +109,6 @@ export default {
     return {
       activeClass: 'bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100',
       inactiveClass: 'border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100',
-      
     }
   },
   methods:{
@@ -110,6 +119,13 @@ export default {
   
   computed:{
       ...mapGetters(['isSidebarOpen']),
+      getrouer(){
+        return  this.$router.name
+      }
   },
+  async mounted(){
+    
+  }
+  
 }
 </script>
