@@ -22,4 +22,14 @@
             $this->db->execute([$city]);
             return $this->db->getResult();
         }
+        public function getAllHospitalsAdmin(){
+            $this->db->prepareQuery("SELECT * FROM `hospitals`");
+            $this->db->execute();
+            return $this->db->getResult();
+        }
+        public function addHospitalAdmin($hospitalname,$hospitalCity,$hospitaladdress){
+            $this->db->prepareQuery("INSERT INTO `hospitals` (`hospital_id`, `hospital_name`, `hospital_city`, `hospital_address`) VALUES (NULL, ?, ?, ?)");
+            $this->db->bindValues([$hospitalname,$hospitalCity,$hospitaladdress]);
+            return $this->db->execute();
+        }
  }
