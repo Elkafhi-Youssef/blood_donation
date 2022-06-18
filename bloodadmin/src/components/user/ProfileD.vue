@@ -7,7 +7,7 @@
           <h1>{{ donor.fullname }}</h1>
         </div>
         <div class="mt-4 flex justify-center">
-          <img class="mx-auto h-40 w-40 object-cover rounded-full" :src="'http://127.0.0.1/BLOOD_DONATION/backendAPI/public/imgsProfile/'+donor.image" alt="" />
+          <img class="mx-auto h-40 w-40 object-cover rounded-full" :src="'http://127.0.0.1/BLOOD_DONATION/backendAPI/public/imgsProfile/'+donor.image" alt=" image blood donor" />
         </div>
         <div class="w-full my-8 ">
           <div class="flex flex-col">
