@@ -7,7 +7,7 @@
       px-6
       py-2
       bg-white
-      border-b-4 border-indigo-600
+      border-b-4 border-second_col
     "
   >
     <div class="flex items-center">
@@ -45,6 +45,7 @@
         </span>
 
         <input
+        v-model="keyword"
           class="
             w-32
             pl-10
@@ -66,7 +67,7 @@
     </div>
 
     <div class="flex items-center">
-      <div class="flex items-center">
+      <!-- <div class="flex items-center">
         <div class="relative">
           <button
             @click="notificationOpen = !notificationOpen"
@@ -206,7 +207,7 @@
             </a>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="relative">
         <button
           @click="dropdownOpen = !dropdownOpen"
@@ -259,14 +260,7 @@
           >
             <a
               href="#"
-              class="
-                px-4
-                py-2
-                flex
-                rounded-md
-                text-sm text-gray-700
-                hover:bg-indigo-600 hover:text-white
-              "
+              class="px-4 py-2 flex rounded-md text-sm text-gray-700 hover:bg-second_col hover:text-white cursor-pointer "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -286,14 +280,7 @@
             >
             <a
               href="#"
-              class="
-                flex
-                rounded-md
-                px-4
-                py-2
-                text-sm text-gray-700
-                hover:bg-indigo-600 hover:text-white
-              "
+             class="px-4 py-2 flex rounded-md text-sm text-gray-700 hover:bg-second_col hover:text-white cursor-pointer "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -316,16 +303,8 @@
               </svg>
               Settings</a
             >
-            <router-link
-              to="/"
-              class="
-                flex
-                px-4
-                py-2
-                rounded-md
-                text-sm text-gray-700
-                hover:bg-indigo-600 hover:text-white
-              "
+            <a @click="logout()"
+              class="px-4 py-2 flex rounded-md text-sm text-gray-700 hover:bg-second_col hover:text-white cursor-pointer "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -341,8 +320,8 @@
                   d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                 />
               </svg>
-              Log out</router-link
-            >
+              Log out</a
+             >
           </div>
         </transition>
       </div>
@@ -350,22 +329,32 @@
   </header>
 </template>
 
-<script >
-import { mapGetters } from 'vuex'
-export default {
-  name: 'Header',
-  data() {
-    return {
-      dropdownOpen: false
+<script setup >
+import { useStore,mapState } from 'vuex'
+import { useRouter } from 'vue-router'
+import {ref,onMounted,watchEffect} from 'vue'
+const keyword = ref('')
+const router  = useRouter()
+const dropdownOpen = ref()
+dropdownOpen.value = false
+const store = useStore()
+console.log('value of dropdownOpen',dropdownOpen)
+function openSidBar(){
+  store.dispatch('isSidebarOpen',true)
+} 
+
+
+// how to watchEffect for watch for changes keyword.value
+watchEffect(()=>{
+  console.log('value of keyword',keyword.value)
+  store.dispatch('searchKeyword',keyword.value)
+})
+
+ function logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("idProfileDonor");
+      router.push("/loginadmin");
     }
-  },
-   methods:{
-      openSidBar(){
-        this.$store.dispatch('isSidebarOpen',true)
-      }
-  },
-  computed:{
-      // ...mapGetters(['isSidebarOpen'])
-  }
-}
+
 </script>
