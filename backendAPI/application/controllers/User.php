@@ -90,7 +90,6 @@ class User extends Controller
         }
         $this->response();
     }
-   
     public function login()
     {
         if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
@@ -105,6 +104,46 @@ class User extends Controller
             $email = htmlentities($data->email);
             $password = htmlentities($data->password);
             $check =$this->modelInstance->login($email);
+            if($check){
+                if(password_verify($password, $check['password']))
+                {
+                    $token = Auth::jwt_encode(300, $check);
+                    $this->res['token'] = $token;
+                    $this->res['message'] = 'success';
+                    $this->res['alert'] = 'You have successfully logged in';
+                    $this->res['data'] = $check;
+                    $this->response();
+                    
+                }else{
+                    $this->res['token'] = null;
+                    $this->res['message'] = 'error';
+                    $this->res['alert'] = 'Wrong password';
+                    $this->response();
+                }
+            }else{
+                $this->res['token'] = null;
+                $this->res['message'] = 'error';
+                $this->res['alert'] = 'Wrong email';
+                $this->response();
+            }
+        }
+    }
+    public function loginAdmin()
+    {
+        if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
+            $data = json_decode(file_get_contents("php://input"));
+            if(empty($data)){
+                $this->res['token'] = null;
+                $this->res['message'] = 'data not found';
+                $this->res['alert'] = 'You have to fill all the fields';
+                $this->res['err'] = true;
+                $this->response();
+            }
+            $email = htmlentities($data->email);
+            $password = htmlentities($data->password);
+            
+
+            $check =$this->modelInstance->loginAdmin($email);
             if($check){
                 if(password_verify($password, $check['password']))
                 {
@@ -219,7 +258,20 @@ class User extends Controller
     }
     }
     public function getAllUser(){
-        $data  = $this->modelInstance->getAllUser();
+        $data  = $this->modelInstance->getAllDonor();
+        if ($data) {
+            $this->res['data'] = $data;
+            $this->res['code'] = 200;
+            $this->res['message'] = "success";
+        } else {
+            $this->res['data'] = "No data";
+            $this->res['message'] = "failed";
+            $this->res['code'] = 404;
+        }
+        $this->response();
+    }
+    public function getAllUsersAdmin(){
+        $data  = $this->modelInstance->getAllUsersAdmin();
         if ($data) {
             $this->res['data'] = $data;
             $this->res['code'] = 200;
@@ -243,6 +295,52 @@ class User extends Controller
             $this->res['code'] = 404;
         }
         $this->response();
+    }
+    public function updateUserByAdmin($id){
+        if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
+            if(isset($_POST)){
+
+           
+            $fullname = htmlentities($_POST['fullname']);
+            $phone = htmlentities($_POST['phone']);
+            $email = htmlentities($_POST['email']);
+            $city = htmlentities($_POST['city']);
+            $role = htmlentities($_POST['role']);
+            $blood_id = htmlentities($_POST['blood_id']);
+            $age = htmlentities($_POST['age']);
+           
+            $check =$this->modelInstance->updateUserByAdmin($fullname,$phone,$email,$city,$role,$blood_id,$age,$id);
+            if($check){
+                $this->res['token'] = null;
+                $this->res['message'] = 'success';
+                $this->res['alert'] = 'You have successfully updated your information';
+            }else {
+                $this->res['token'] = null;
+                $this->res['message'] = 'error';
+                $this->res['alert'] = 'Something went wrong';
+            }
+         }else{
+            $this->res['message'] = 'error';
+         }
+        }else{
+            $this->res['token'] = null;
+            $this->res['message'] = 'error';
+            $this->res['alert'] = 'Something went wrong';
+        }
+        $this->response();
+    }
+    public function deleteUserByAdmin($id){
+      $delete  = $this->modelInstance->deleteUserByAdmin($id);
+      if($delete){
+        $this->res['token'] = null;
+        $this->res['message'] = 'success';
+        $this->res['alert'] = 'You have successfully delete user';
+      }else{
+        $this->res['token'] = null;
+        $this->res['message'] = 'error';
+        $this->res['alert'] = 'User didn t delete';
+      }
+      $this->response();
     }
 }
 
