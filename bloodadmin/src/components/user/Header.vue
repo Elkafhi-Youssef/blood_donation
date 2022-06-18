@@ -104,12 +104,12 @@
                 <div >
                   <button
                     @click="dropdownOpen = !dropdownOpen"
-                    class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none "
+                    class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none ml-5 "
                   >
-                    <img
+                    <img 
                       class="object-cover w-full h-full"
                       :src="'http://127.0.0.1/BLOOD_DONATION/backendAPI/public/imgsProfile/'+imageuser"
-                      alt="Your avatar"
+                      alt="image user"
                     />
                   </button>
 
@@ -129,7 +129,7 @@
                   >
                     <div
                       v-show="dropdownOpen"
-                      class="absolute right-0 z-20 w-48 py-1 mt-2 bg-white rounded-lg shadow-xl"
+                      class="absolute right-1/2 translate-x-1/2 md:right-1 md:translate-x-0 z-20 w-48 py-1 mt-2 bg-white rounded-lg shadow-xl "
                     >
                       <a 
                       @click="profileuser"
@@ -152,7 +152,7 @@
                       >
                       <a
                         href="#"
-                        class="flex rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+                        class="px-4 py-2 flex rounded-md text-sm text-gray-700 hover:bg-second_col hover:text-white cursor-pointer"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +177,7 @@
                       >
                       <a
                         @click="logout"  
-                        class="flex px-4 py-2 rounded-md text-sm text-gray-700 hover:bg-indigo-600 hover:text-white cursor-pointer"
+                        class="px-4 py-2 flex rounded-md text-sm text-gray-700 hover:bg-second_col hover:text-white cursor-pointer "
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -222,11 +222,7 @@ export default {
       menuIsopen: false,
       dropdownOpen: false,
       token: localStorage.getItem("token") ,
-      imageuser: JSON.parse (localStorage.getItem("user")).image ,
-      // headermenu :[
-      //   { to: '/', title: 'sign in',
-      //     showButton: !this.$store.state.auth.isUserLoggedIn },
-      // ]
+      // imageuser: JSON.parse (localStorage.getItem("user")).image,
     };
   },
   methods: {
@@ -234,7 +230,6 @@ export default {
       this.menuIsopen = !this.menuIsopen;
     },
       logout() {
-      console.log("logout");
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       localStorage.removeItem("idProfileDonor");
@@ -295,12 +290,22 @@ export default {
       this.$router.push("/donate");
      }
     },
+    
     // logout: function () {
     // this.$store.dispatch(AUTH_LOGOUT)
     // .then(() => {
     //   this.$router.push('/loginuser')
     // })
-  }
+  },
+  computed:{
+      imageuser(){
+        if(!this.token){
+          return "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200";
+        }else{
+         return  JSON.parse(localStorage.getItem("user")).image;
+        }
+      }
+    }
    
     
  
