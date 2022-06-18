@@ -3,6 +3,7 @@ import Loginadmin from '../views/admin/Loginadmin.vue'
 import Dashboardusers from '../views/admin/Dashboardusers.vue'
 import Dashboard from '../views/admin/Dashboard.vue'
 import Dashboardhospitals from '../views/admin/Dashboardhospitals.vue'
+import DashboardAddHospital from '../views/admin/DashboardAddHospital.vue'
 import Home from '../views/user/Home.vue'
 import LoginUser from '../views/user/LoginUser.vue'
 import RegisterUser from '../views/user/RegisterUser.vue'
@@ -40,11 +41,18 @@ const routes = [
     children: [
       {
         path: '/dashboard/users',
+        name:'dashboardusers',
         component: Dashboardusers,
       },
       {
         path: '/dashboard/hospitals',
+        name:'dashboardhospitals',
         component: Dashboardhospitals,
+      },
+      {
+        path: '/dashboard/addhospital',
+        name:'addhospitaladmin',
+        component: DashboardAddHospital,
       },
     ],
   },
