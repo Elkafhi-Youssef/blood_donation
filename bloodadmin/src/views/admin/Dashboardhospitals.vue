@@ -31,18 +31,16 @@
             </thead>
 
             <tbody class="bg-white">
-              <tr v-for="(u, index) in users" :key="index">
+              <tr v-for="(h, index) in hospitals" :key="index">
                 <td
                   class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                 >
                   <div class="flex items-center">
                     <div class="ml-4">
                       <div class="text-sm font-medium leading-5 text-gray-900">
-                        {{ u.name }}
+                        {{ h.hospital_name }}
                       </div>
-                      <div class="text-sm leading-5 text-gray-500">
-                        {{ u.email }}
-                      </div>
+                      
                     </div>
                   </div>
                 </td>
@@ -50,21 +48,19 @@
                 <td
                   class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                 >
-                  <div class="text-sm leading-5 text-gray-900">
-                    {{ u.address }}
-                  </div>
-                  <div class="text-sm leading-5 text-gray-500">
-                    {{ u.title2 }}
-                  </div>
+                 <div class="text-sm leading-5 text-gray-500">
+                        {{ h.hospital_address }}
+                      </div>
+               
                 </td>
 
                 <td
                   class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                 >
-                  <span
-                    class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full"
-                    >{{ u.city }}</span
-                  >
+                 <div class="text-sm leading-5 text-gray-900">
+                    {{ h.hospital_city}}
+                  </div>
+                 
                 </td>
 
                
@@ -119,43 +115,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "Dashboardhospitals",
-  components: {},
-  data() {
-    return {
-      users: [
-        {
-          city: "safi",
-          name: "Vera Carpenter",
-          role: "Admin",
-          created: "Jan 21, 2020",
-          address: "Vera Carpenter Vera Carpenter",
-        },
-        {
-          city: "safi",
-          name: "Vera Carpenter",
-          role: "Admin",
-          created: "Jan 21, 2020",
-          address: "Vera Carpenter Vera Carpenter",
-        },
-        {
-          city: "safi",
-          name: "Vera Carpenter",
-          role: "Admin",
-          created: "Jan 21, 2020",
-          address: "Vera Carpenter Vera Carpenter",
-        },
-        {
-          city: "safi",
-          name: "Vera Carpenter",
-          role: "Admin",
-          created: "Jan 21, 2020",
-          address: "Vera Carpenter Vera Carpenter",
-        },
-      ],
-    };
-  },
-};
+<script setup>
+
+import { computed } from '@vue/reactivity';
+import { onMounted } from 'vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+
+const hospitals = computed(() => {
+  return store.state.allHospitalsAdmin
+})
+ onMounted(() => {
+  store.dispatch('getAllHospitalsAdmin')
+  console.log('work in admin users')
+})
 </script>
