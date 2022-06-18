@@ -71,10 +71,19 @@ export default createStore({
     appointmentRequestsPatient:[],
     cancelRequestsPatient:[],
     isUpdateProfile:true,
+    allUsersAdmin:[],
+    allHospitalsAdmin:[],
+    isUpdateProfileByAdmin:false,
+    addHospitalAdmin:false,
+    keyword:''
   },
   //==============================Getters============================================
   getters: {
     isSidebarOpen: (state) => state.isOpen,
+    getKeyword(state){
+      console.log('getters',state.keyword)
+      return state.keyword
+    }
   },
   //===========================Mutations=======================================
   mutations: {
@@ -92,7 +101,6 @@ export default createStore({
     },
     SET_DONORS(state, donors) {
       state.donors = donors;
-      console.log("data by serch home in nutation", state.donors);
     },
     SET_DATASEARCH(state, blood, city) {
       state.data.blood = blood;
@@ -115,7 +123,7 @@ export default createStore({
     },
     SET_PROFILEUSER(state, profile) {
       state.profile = profile;
-      console.log("profile state", state.profile);
+      console.log("profile state for updaet user in dashboard", state.profile);
     },
     SET_NEWREQUEST(state, newRequest) {
       state.newRequest = newRequest;
@@ -137,9 +145,27 @@ export default createStore({
     },
     SET_ISUPDATEPROFILE(state,isupdateProfile){
       state.isUpdateProfile = isupdateProfile;
+    },
+    SET_ALLUSERSADMIN(state,data){
+      state.allUsersAdmin = data;
+      console.log("all user in page admin",state.allUsersAdmin);
+    },
+    SET_ISUPDATEPROFILEADMIN(state, variable){
+      state.isUpdateProfileByAdmin = variable
+      console.log(state.isUpdateProfileByAdmin)
+    },
+    SET_ALLHOSPITALSADMIN(state,data){
+      state.allHospitalsAdmin  = data 
+      console.log(state.allHospitalsAdmin)
+    },
+    SET_ADDHOSPITALADMIN(state,data){
+      state.addHospitalAdmin = data
+      console.log(state.addHospitalAdmin);
+    },
+    SET_SEARCHKEYWORD(state,key){
+      state.keyword = key
+      console.log(state.keyword)
     }
-
-
   },
   //========================Actions==================================
   actions: {
@@ -227,7 +253,7 @@ export default createStore({
       axios(config)
         .then((response) => {
           if(response.data.message == "success"){
-            commit("SET_ISUPDATEPROFILE",false);
+            commit("SET_ISUPDATEPROFILE",true);
           }
         })
         .catch((error) => {
@@ -324,8 +350,7 @@ export default createStore({
       commit("SET_CITIESHOSPITALS", response.data.data);
     },
     async getNewRequest({ commit }, data) {
-      console.log("id",data.id);
-      console.log("token",data.token);
+      
       var config = {
         method: 'get',
         url: 'http://127.0.0.1/BLOOD_DONATION/backendAPI/Request/getNewRequest/'+data.id,
@@ -511,9 +536,69 @@ export default createStore({
         console.log(error);
       });
     },
+    async getAllUsersAdmin({commit}){
+    const response = await axios.get(
+      "http://127.0.0.1/blood_donation/backendAPI/User/getAllUsersAdmin"
+    );
+    const data = await response.data.data;
+    if(response.data.message == "success"){
+      console.log("success");
+      commit("SET_ALLUSERSADMIN", response.data.data);
+    }
+
+    },
+    async getAllHospitalsAdmin({commit}){
+      const response = await axios.get(
+        "http://127.0.0.1/blood_donation/backendAPI/Hospital/getAllHospitalsAdmin"
+      );
+      const data = await response.data.data;
+      if(response.data.message == "success"){
+        console.log("success");
+        commit("SET_ALLHOSPITALSADMIN", response.data.data);
+      }
+  
+      },
+    async updateUserByAdmin({commit},data){
+      console.log(data.user_id)
+      const config = {
+        method: "post",
+        url: "http://127.0.0.1/BLOOD_DONATION/backendAPI/User/updateUserByAdmin/"+data.user_id,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: data,
+      };
+
+      const response = await axios(config)
+      const date = await response.data
+      if(response.data.message == "success"){
+        commit("SET_ISUPDATEPROFILEADMIN",true);
+      }else{
+        commit("SET_ISUPDATEPROFILEADMIN",false);
+      }
+    },
+    async addHospitalAdmin({commit}, data){
+      console.log('data li katmxi',data);
+
+      const response = await axios.post("http://127.0.0.1/BLOOD_DONATION/backendAPI/Hospital/addHospitalAdmin",{
+        headers:{
+          "Content-Type": "multipart/form-data",
+        },
+        data: data,
+      })
+      if(response.data.message == "success"){
+        console.log('d5al hna')
+       await commit("SET_ADDHOSPITALADMIN",true)
+      }else{
+       await commit("SET_ADDHOSPITALADMIN",false)
+      }
+    },
+    async searchKeyword({commit},data){
+      commit("SET_SEARCHKEYWORD",data);
+    }
   },
-  modules: {
-    Users,
-    Admin,
-  },
+// modules: {
+//   Users,
+//   Admin,
+// },
 });
