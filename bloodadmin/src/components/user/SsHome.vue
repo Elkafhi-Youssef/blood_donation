@@ -13,7 +13,7 @@
       <div class="mx-2 sm:mx-8 md:mx-16 flex justify-center gap-2 flex-wrap">
         <div v-for="item in users" key="item.user_id" @click="getProfileDonor(item.user_id)" class="flex flex-col text-center w-64">
           <div class="h-48">
-            <img class="mx-auto w-full h-full object-fill" src="@/assets/img/moi.png" alt="" />
+            <img class="mx-auto w-full h-full object-fill" :src="'http://127.0.0.1/BLOOD_DONATION/backendAPI/public/imgsProfile/'+item.image" alt="" />
           </div>
           <div class="text-white w-full bg-second_col">
             <div class="flex flex-col mx-auto">
