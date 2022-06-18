@@ -6,9 +6,12 @@
       'background-size': 'cover',
       'background-position': 'center',
     }"
-  >
+  > 
+  <div>
+
+  
     <div
-      class="container flex justify-center md:justify-between lg:justify-between flex-wrap lg:mx-32"
+      class="container flex  justify-center md:justify-between lg:justify-between flex-wrap lg:mx-32"
     >
       <div class="flex flex-col text-center w-56 h-auto">
         <div class="">
@@ -18,12 +21,9 @@
             alt=""
           />
         </div>
-        <div class="text-white mt-2 w-full text-xs">
+        <div class="text-white mt-2 w-full text-xl">
           <p>
-            Animi sequi aliquam illum voluptatum ratione, quaerat dignissimos
-            fugiat. Ea, vitae odio quasi aspernatur expedita maiores, quidem
-            voluptates libero quaerat fugiat nisi, ratione inventore iusto
-            nostrum voluptas sint culpa.
+            Blood is a web site that help who need a blood, Any where anytime,with a min of time.
           </p>
         </div>
       </div>
@@ -90,6 +90,13 @@
         </div>
       </div>
     </div>
+      <div class=" text-center text-xl text-white mt-4">
+        <p>
+          © 2022 Blood. All rights reserved.
+        </p>
+
+      </div>
+      </div>
   </div>
 </template>
 
