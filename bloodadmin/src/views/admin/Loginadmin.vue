@@ -5,7 +5,7 @@
         <img class=" w-28 " src="@/assets/img/new_logo.png" alt="">
       </div>
 
-      <form class="mt-4" @submit.prevent="login">
+      <form class="mt-4" @submit.prevent="loginAdmin">
         <label class="block">
           <span class="text-sm text-gray-700">Email</span>
           <input
@@ -31,7 +31,7 @@
                   focus:border-second_col
                   focus:outline-none
                 "
-            v-model="email"
+            v-model="user.email"
           />
         </label>
 
@@ -60,7 +60,7 @@
                   focus:border-second_col
                   focus:outline-none
                 "
-            v-model="password"
+            v-model="user.password"
           />
         </label>
 
@@ -129,27 +129,76 @@
 
 <script  setup >
 import { useRouter } from 'vue-router'
+import { onMounted,ref } from 'vue';
 import { useStore } from 'vuex'
+import axios from "axios"
+import { defineComponent } from "vue";
+// import the library
+import { createToast } from "mosha-vue-toastify";
+// import the styling for the toast
+import "mosha-vue-toastify/dist/style.css";
+  const store = useStore()
 const router = useRouter()
-// export default {
-//   name: "Login-view",
-//   data() {
-//     return {
-//       email: "",
-//     }
-//   },
-//   methods: {
+  const user = ref({email:"elkafhiyoussef@gmail.com",password:"123456"})
+function loginAdmin() {
+      const data = JSON.stringify(user.value);
+      const config = {
+        method: 'post',
+        url: 'http://127.0.0.1/blood_donation/backendAPI/User/loginAdmin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: data
+      };
+      axios(config)
+        .then((response) => {
+          // console.log(response.data);
+          // let token = response.data.token;
 
 
 
-// login() {
-//   this.$router.push("/dashboard");
-// }
-// }
-// }
-const email = "youssef@gmial.com"
+          console.log(response.data.data);
+          if (response.data.message == "success") {
+            localStorage.setItem("user", JSON.stringify(response.data.data));
+            router.push("/dashboard/users");
+            createToast(
+              {
+                title: "success",
+                description: response.data.alert,
+              },
+              {
+                showIcon: "true",
+                showCloseButton: "true",
+                swipeClose: "true",
+                toastBackgroundColor: "green",
+                type: "success",
+              }
+            );
+          } else {
+            createToast(
+              {
+                title: "Some text",
+                description: response.data.alert,
+              },
+              {
+                showIcon: "true",
+                showCloseButton: "true",
+                swipeClose: "true",
+                toastBackgroundColor: "red",
+                type: "warning",
+              }
+            );
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+}
   const login = ()=>{
-    router.push("/dashboard/users");
   }
+  onMounted(() => {
+  console.log('hani jit l login admin')
+})
 </script>
 
